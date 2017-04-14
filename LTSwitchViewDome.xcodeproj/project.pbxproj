@@ -1,0 +1,554 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F2CCBECE1EA0F5F10062BFC0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CCBECD1EA0F5F10062BFC0 /* main.m */; };
+		F2CCBED11EA0F5F10062BFC0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CCBED01EA0F5F10062BFC0 /* AppDelegate.m */; };
+		F2CCBED41EA0F5F10062BFC0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CCBED31EA0F5F10062BFC0 /* ViewController.m */; };
+		F2CCBED71EA0F5F10062BFC0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2CCBED51EA0F5F10062BFC0 /* Main.storyboard */; };
+		F2CCBEDA1EA0F5F10062BFC0 /* LTSwitchViewDome.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F2CCBED81EA0F5F10062BFC0 /* LTSwitchViewDome.xcdatamodeld */; };
+		F2CCBEDC1EA0F5F10062BFC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2CCBEDB1EA0F5F10062BFC0 /* Assets.xcassets */; };
+		F2CCBEDF1EA0F5F10062BFC0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2CCBEDD1EA0F5F10062BFC0 /* LaunchScreen.storyboard */; };
+		F2CCBEEA1EA0F5F10062BFC0 /* LTSwitchViewDomeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CCBEE91EA0F5F10062BFC0 /* LTSwitchViewDomeTests.m */; };
+		F2CCBEF51EA0F5F10062BFC0 /* LTSwitchViewDomeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CCBEF41EA0F5F10062BFC0 /* LTSwitchViewDomeUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F2CCBEE61EA0F5F10062BFC0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F2CCBEC11EA0F5F10062BFC0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F2CCBEC81EA0F5F10062BFC0;
+			remoteInfo = LTSwitchViewDome;
+		};
+		F2CCBEF11EA0F5F10062BFC0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F2CCBEC11EA0F5F10062BFC0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F2CCBEC81EA0F5F10062BFC0;
+			remoteInfo = LTSwitchViewDome;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F2CCBEC91EA0F5F10062BFC0 /* LTSwitchViewDome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LTSwitchViewDome.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2CCBECD1EA0F5F10062BFC0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F2CCBECF1EA0F5F10062BFC0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		F2CCBED01EA0F5F10062BFC0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		F2CCBED21EA0F5F10062BFC0 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		F2CCBED31EA0F5F10062BFC0 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		F2CCBED61EA0F5F10062BFC0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F2CCBED91EA0F5F10062BFC0 /* LTSwitchViewDome.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LTSwitchViewDome.xcdatamodel; sourceTree = "<group>"; };
+		F2CCBEDB1EA0F5F10062BFC0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F2CCBEDE1EA0F5F10062BFC0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F2CCBEE01EA0F5F10062BFC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F2CCBEE51EA0F5F10062BFC0 /* LTSwitchViewDomeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LTSwitchViewDomeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2CCBEE91EA0F5F10062BFC0 /* LTSwitchViewDomeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LTSwitchViewDomeTests.m; sourceTree = "<group>"; };
+		F2CCBEEB1EA0F5F10062BFC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F2CCBEF01EA0F5F10062BFC0 /* LTSwitchViewDomeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LTSwitchViewDomeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2CCBEF41EA0F5F10062BFC0 /* LTSwitchViewDomeUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LTSwitchViewDomeUITests.m; sourceTree = "<group>"; };
+		F2CCBEF61EA0F5F10062BFC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F2CCBEC61EA0F5F10062BFC0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2CCBEE21EA0F5F10062BFC0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2CCBEED1EA0F5F10062BFC0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F2CCBEC01EA0F5F10062BFC0 = {
+			isa = PBXGroup;
+			children = (
+				F2CCBECB1EA0F5F10062BFC0 /* LTSwitchViewDome */,
+				F2CCBEE81EA0F5F10062BFC0 /* LTSwitchViewDomeTests */,
+				F2CCBEF31EA0F5F10062BFC0 /* LTSwitchViewDomeUITests */,
+				F2CCBECA1EA0F5F10062BFC0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F2CCBECA1EA0F5F10062BFC0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F2CCBEC91EA0F5F10062BFC0 /* LTSwitchViewDome.app */,
+				F2CCBEE51EA0F5F10062BFC0 /* LTSwitchViewDomeTests.xctest */,
+				F2CCBEF01EA0F5F10062BFC0 /* LTSwitchViewDomeUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F2CCBECB1EA0F5F10062BFC0 /* LTSwitchViewDome */ = {
+			isa = PBXGroup;
+			children = (
+				F2CCBECF1EA0F5F10062BFC0 /* AppDelegate.h */,
+				F2CCBED01EA0F5F10062BFC0 /* AppDelegate.m */,
+				F2CCBED21EA0F5F10062BFC0 /* ViewController.h */,
+				F2CCBED31EA0F5F10062BFC0 /* ViewController.m */,
+				F2CCBED51EA0F5F10062BFC0 /* Main.storyboard */,
+				F2CCBEDB1EA0F5F10062BFC0 /* Assets.xcassets */,
+				F2CCBEDD1EA0F5F10062BFC0 /* LaunchScreen.storyboard */,
+				F2CCBEE01EA0F5F10062BFC0 /* Info.plist */,
+				F2CCBED81EA0F5F10062BFC0 /* LTSwitchViewDome.xcdatamodeld */,
+				F2CCBECC1EA0F5F10062BFC0 /* Supporting Files */,
+			);
+			path = LTSwitchViewDome;
+			sourceTree = "<group>";
+		};
+		F2CCBECC1EA0F5F10062BFC0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F2CCBECD1EA0F5F10062BFC0 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F2CCBEE81EA0F5F10062BFC0 /* LTSwitchViewDomeTests */ = {
+			isa = PBXGroup;
+			children = (
+				F2CCBEE91EA0F5F10062BFC0 /* LTSwitchViewDomeTests.m */,
+				F2CCBEEB1EA0F5F10062BFC0 /* Info.plist */,
+			);
+			path = LTSwitchViewDomeTests;
+			sourceTree = "<group>";
+		};
+		F2CCBEF31EA0F5F10062BFC0 /* LTSwitchViewDomeUITests */ = {
+			isa = PBXGroup;
+			children = (
+				F2CCBEF41EA0F5F10062BFC0 /* LTSwitchViewDomeUITests.m */,
+				F2CCBEF61EA0F5F10062BFC0 /* Info.plist */,
+			);
+			path = LTSwitchViewDomeUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F2CCBEC81EA0F5F10062BFC0 /* LTSwitchViewDome */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F2CCBEF91EA0F5F10062BFC0 /* Build configuration list for PBXNativeTarget "LTSwitchViewDome" */;
+			buildPhases = (
+				F2CCBEC51EA0F5F10062BFC0 /* Sources */,
+				F2CCBEC61EA0F5F10062BFC0 /* Frameworks */,
+				F2CCBEC71EA0F5F10062BFC0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LTSwitchViewDome;
+			productName = LTSwitchViewDome;
+			productReference = F2CCBEC91EA0F5F10062BFC0 /* LTSwitchViewDome.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F2CCBEE41EA0F5F10062BFC0 /* LTSwitchViewDomeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F2CCBEFC1EA0F5F10062BFC0 /* Build configuration list for PBXNativeTarget "LTSwitchViewDomeTests" */;
+			buildPhases = (
+				F2CCBEE11EA0F5F10062BFC0 /* Sources */,
+				F2CCBEE21EA0F5F10062BFC0 /* Frameworks */,
+				F2CCBEE31EA0F5F10062BFC0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F2CCBEE71EA0F5F10062BFC0 /* PBXTargetDependency */,
+			);
+			name = LTSwitchViewDomeTests;
+			productName = LTSwitchViewDomeTests;
+			productReference = F2CCBEE51EA0F5F10062BFC0 /* LTSwitchViewDomeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F2CCBEEF1EA0F5F10062BFC0 /* LTSwitchViewDomeUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F2CCBEFF1EA0F5F10062BFC0 /* Build configuration list for PBXNativeTarget "LTSwitchViewDomeUITests" */;
+			buildPhases = (
+				F2CCBEEC1EA0F5F10062BFC0 /* Sources */,
+				F2CCBEED1EA0F5F10062BFC0 /* Frameworks */,
+				F2CCBEEE1EA0F5F10062BFC0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F2CCBEF21EA0F5F10062BFC0 /* PBXTargetDependency */,
+			);
+			name = LTSwitchViewDomeUITests;
+			productName = LTSwitchViewDomeUITests;
+			productReference = F2CCBEF01EA0F5F10062BFC0 /* LTSwitchViewDomeUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F2CCBEC11EA0F5F10062BFC0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = yiniu;
+				TargetAttributes = {
+					F2CCBEC81EA0F5F10062BFC0 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 5XP7V8XFSX;
+						ProvisioningStyle = Automatic;
+					};
+					F2CCBEE41EA0F5F10062BFC0 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 5XP7V8XFSX;
+						ProvisioningStyle = Automatic;
+						TestTargetID = F2CCBEC81EA0F5F10062BFC0;
+					};
+					F2CCBEEF1EA0F5F10062BFC0 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 5XP7V8XFSX;
+						ProvisioningStyle = Automatic;
+						TestTargetID = F2CCBEC81EA0F5F10062BFC0;
+					};
+				};
+			};
+			buildConfigurationList = F2CCBEC41EA0F5F10062BFC0 /* Build configuration list for PBXProject "LTSwitchViewDome" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F2CCBEC01EA0F5F10062BFC0;
+			productRefGroup = F2CCBECA1EA0F5F10062BFC0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F2CCBEC81EA0F5F10062BFC0 /* LTSwitchViewDome */,
+				F2CCBEE41EA0F5F10062BFC0 /* LTSwitchViewDomeTests */,
+				F2CCBEEF1EA0F5F10062BFC0 /* LTSwitchViewDomeUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F2CCBEC71EA0F5F10062BFC0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2CCBEDF1EA0F5F10062BFC0 /* LaunchScreen.storyboard in Resources */,
+				F2CCBEDC1EA0F5F10062BFC0 /* Assets.xcassets in Resources */,
+				F2CCBED71EA0F5F10062BFC0 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2CCBEE31EA0F5F10062BFC0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2CCBEEE1EA0F5F10062BFC0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F2CCBEC51EA0F5F10062BFC0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2CCBED41EA0F5F10062BFC0 /* ViewController.m in Sources */,
+				F2CCBED11EA0F5F10062BFC0 /* AppDelegate.m in Sources */,
+				F2CCBECE1EA0F5F10062BFC0 /* main.m in Sources */,
+				F2CCBEDA1EA0F5F10062BFC0 /* LTSwitchViewDome.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2CCBEE11EA0F5F10062BFC0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2CCBEEA1EA0F5F10062BFC0 /* LTSwitchViewDomeTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2CCBEEC1EA0F5F10062BFC0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2CCBEF51EA0F5F10062BFC0 /* LTSwitchViewDomeUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F2CCBEE71EA0F5F10062BFC0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F2CCBEC81EA0F5F10062BFC0 /* LTSwitchViewDome */;
+			targetProxy = F2CCBEE61EA0F5F10062BFC0 /* PBXContainerItemProxy */;
+		};
+		F2CCBEF21EA0F5F10062BFC0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F2CCBEC81EA0F5F10062BFC0 /* LTSwitchViewDome */;
+			targetProxy = F2CCBEF11EA0F5F10062BFC0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F2CCBED51EA0F5F10062BFC0 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F2CCBED61EA0F5F10062BFC0 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F2CCBEDD1EA0F5F10062BFC0 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F2CCBEDE1EA0F5F10062BFC0 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F2CCBEF71EA0F5F10062BFC0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		F2CCBEF81EA0F5F10062BFC0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F2CCBEFA1EA0F5F10062BFC0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 5XP7V8XFSX;
+				INFOPLIST_FILE = LTSwitchViewDome/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yiniu.LTSwitchViewDome;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F2CCBEFB1EA0F5F10062BFC0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 5XP7V8XFSX;
+				INFOPLIST_FILE = LTSwitchViewDome/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yiniu.LTSwitchViewDome;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		F2CCBEFD1EA0F5F10062BFC0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 5XP7V8XFSX;
+				INFOPLIST_FILE = LTSwitchViewDomeTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yiniu.LTSwitchViewDomeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LTSwitchViewDome.app/LTSwitchViewDome";
+			};
+			name = Debug;
+		};
+		F2CCBEFE1EA0F5F10062BFC0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 5XP7V8XFSX;
+				INFOPLIST_FILE = LTSwitchViewDomeTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yiniu.LTSwitchViewDomeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LTSwitchViewDome.app/LTSwitchViewDome";
+			};
+			name = Release;
+		};
+		F2CCBF001EA0F5F10062BFC0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 5XP7V8XFSX;
+				INFOPLIST_FILE = LTSwitchViewDomeUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yiniu.LTSwitchViewDomeUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = LTSwitchViewDome;
+			};
+			name = Debug;
+		};
+		F2CCBF011EA0F5F10062BFC0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 5XP7V8XFSX;
+				INFOPLIST_FILE = LTSwitchViewDomeUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yiniu.LTSwitchViewDomeUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = LTSwitchViewDome;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F2CCBEC41EA0F5F10062BFC0 /* Build configuration list for PBXProject "LTSwitchViewDome" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F2CCBEF71EA0F5F10062BFC0 /* Debug */,
+				F2CCBEF81EA0F5F10062BFC0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F2CCBEF91EA0F5F10062BFC0 /* Build configuration list for PBXNativeTarget "LTSwitchViewDome" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F2CCBEFA1EA0F5F10062BFC0 /* Debug */,
+				F2CCBEFB1EA0F5F10062BFC0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		F2CCBEFC1EA0F5F10062BFC0 /* Build configuration list for PBXNativeTarget "LTSwitchViewDomeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F2CCBEFD1EA0F5F10062BFC0 /* Debug */,
+				F2CCBEFE1EA0F5F10062BFC0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		F2CCBEFF1EA0F5F10062BFC0 /* Build configuration list for PBXNativeTarget "LTSwitchViewDomeUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F2CCBF001EA0F5F10062BFC0 /* Debug */,
+				F2CCBF011EA0F5F10062BFC0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F2CCBED81EA0F5F10062BFC0 /* LTSwitchViewDome.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F2CCBED91EA0F5F10062BFC0 /* LTSwitchViewDome.xcdatamodel */,
+			);
+			currentVersion = F2CCBED91EA0F5F10062BFC0 /* LTSwitchViewDome.xcdatamodel */;
+			path = LTSwitchViewDome.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = F2CCBEC11EA0F5F10062BFC0 /* Project object */;
+}
