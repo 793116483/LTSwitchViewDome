@@ -16,6 +16,10 @@
 		F2CCBEDF1EA0F5F10062BFC0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2CCBEDD1EA0F5F10062BFC0 /* LaunchScreen.storyboard */; };
 		F2CCBEEA1EA0F5F10062BFC0 /* LTSwitchViewDomeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CCBEE91EA0F5F10062BFC0 /* LTSwitchViewDomeTests.m */; };
 		F2CCBEF51EA0F5F10062BFC0 /* LTSwitchViewDomeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CCBEF41EA0F5F10062BFC0 /* LTSwitchViewDomeUITests.m */; };
+		F2CCBF0A1EA0FEC80062BFC0 /* LTSwitchTapBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CCBF041EA0FEC80062BFC0 /* LTSwitchTapBarView.m */; };
+		F2CCBF0B1EA0FEC80062BFC0 /* LTSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CCBF061EA0FEC80062BFC0 /* LTSwitchView.m */; };
+		F2CCBF0C1EA0FEC80062BFC0 /* LTSwitchViewCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CCBF081EA0FEC80062BFC0 /* LTSwitchViewCollectionCell.m */; };
+		F2CCBF0D1EA0FEC80062BFC0 /* LTSwitchViewCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2CCBF091EA0FEC80062BFC0 /* LTSwitchViewCollectionCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +57,13 @@
 		F2CCBEF01EA0F5F10062BFC0 /* LTSwitchViewDomeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LTSwitchViewDomeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2CCBEF41EA0F5F10062BFC0 /* LTSwitchViewDomeUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LTSwitchViewDomeUITests.m; sourceTree = "<group>"; };
 		F2CCBEF61EA0F5F10062BFC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F2CCBF031EA0FEC80062BFC0 /* LTSwitchTapBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTSwitchTapBarView.h; sourceTree = "<group>"; };
+		F2CCBF041EA0FEC80062BFC0 /* LTSwitchTapBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTSwitchTapBarView.m; sourceTree = "<group>"; };
+		F2CCBF051EA0FEC80062BFC0 /* LTSwitchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTSwitchView.h; sourceTree = "<group>"; };
+		F2CCBF061EA0FEC80062BFC0 /* LTSwitchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTSwitchView.m; sourceTree = "<group>"; };
+		F2CCBF071EA0FEC80062BFC0 /* LTSwitchViewCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTSwitchViewCollectionCell.h; sourceTree = "<group>"; };
+		F2CCBF081EA0FEC80062BFC0 /* LTSwitchViewCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTSwitchViewCollectionCell.m; sourceTree = "<group>"; };
+		F2CCBF091EA0FEC80062BFC0 /* LTSwitchViewCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LTSwitchViewCollectionCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +114,7 @@
 		F2CCBECB1EA0F5F10062BFC0 /* LTSwitchViewDome */ = {
 			isa = PBXGroup;
 			children = (
+				F2CCBF021EA0FEC80062BFC0 /* LTSwitchView */,
 				F2CCBECF1EA0F5F10062BFC0 /* AppDelegate.h */,
 				F2CCBED01EA0F5F10062BFC0 /* AppDelegate.m */,
 				F2CCBED21EA0F5F10062BFC0 /* ViewController.h */,
@@ -141,6 +153,20 @@
 				F2CCBEF61EA0F5F10062BFC0 /* Info.plist */,
 			);
 			path = LTSwitchViewDomeUITests;
+			sourceTree = "<group>";
+		};
+		F2CCBF021EA0FEC80062BFC0 /* LTSwitchView */ = {
+			isa = PBXGroup;
+			children = (
+				F2CCBF031EA0FEC80062BFC0 /* LTSwitchTapBarView.h */,
+				F2CCBF041EA0FEC80062BFC0 /* LTSwitchTapBarView.m */,
+				F2CCBF051EA0FEC80062BFC0 /* LTSwitchView.h */,
+				F2CCBF061EA0FEC80062BFC0 /* LTSwitchView.m */,
+				F2CCBF071EA0FEC80062BFC0 /* LTSwitchViewCollectionCell.h */,
+				F2CCBF081EA0FEC80062BFC0 /* LTSwitchViewCollectionCell.m */,
+				F2CCBF091EA0FEC80062BFC0 /* LTSwitchViewCollectionCell.xib */,
+			);
+			path = LTSwitchView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -252,6 +278,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2CCBF0D1EA0FEC80062BFC0 /* LTSwitchViewCollectionCell.xib in Resources */,
 				F2CCBEDF1EA0F5F10062BFC0 /* LaunchScreen.storyboard in Resources */,
 				F2CCBEDC1EA0F5F10062BFC0 /* Assets.xcassets in Resources */,
 				F2CCBED71EA0F5F10062BFC0 /* Main.storyboard in Resources */,
@@ -281,7 +308,10 @@
 			files = (
 				F2CCBED41EA0F5F10062BFC0 /* ViewController.m in Sources */,
 				F2CCBED11EA0F5F10062BFC0 /* AppDelegate.m in Sources */,
+				F2CCBF0B1EA0FEC80062BFC0 /* LTSwitchView.m in Sources */,
 				F2CCBECE1EA0F5F10062BFC0 /* main.m in Sources */,
+				F2CCBF0C1EA0FEC80062BFC0 /* LTSwitchViewCollectionCell.m in Sources */,
+				F2CCBF0A1EA0FEC80062BFC0 /* LTSwitchTapBarView.m in Sources */,
 				F2CCBEDA1EA0F5F10062BFC0 /* LTSwitchViewDome.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -518,6 +548,7 @@
 				F2CCBEFB1EA0F5F10062BFC0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F2CCBEFC1EA0F5F10062BFC0 /* Build configuration list for PBXNativeTarget "LTSwitchViewDomeTests" */ = {
 			isa = XCConfigurationList;
@@ -526,6 +557,7 @@
 				F2CCBEFE1EA0F5F10062BFC0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F2CCBEFF1EA0F5F10062BFC0 /* Build configuration list for PBXNativeTarget "LTSwitchViewDomeUITests" */ = {
 			isa = XCConfigurationList;
@@ -534,6 +566,7 @@
 				F2CCBF011EA0F5F10062BFC0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
