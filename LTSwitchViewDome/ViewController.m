@@ -113,7 +113,7 @@
 {
     NSLog(@"=============== 选中了 %@ 对象 , 下标 = %ld",NSStringFromClass([switchView.currentSubViewOrVc class]),currentPageIndex);
     
-    self.switchTapBarView.selectionIndex = currentPageIndex ;
+//    self.switchTapBarView.selectionIndex = currentPageIndex ;
 }
 -(void)switchView:(LTSwitchView *)switchView subViewOrVcLoadingDataIfNeed:(id)subViewOrVc
 {
@@ -140,9 +140,10 @@
 -(LTSwitchTapBarView *)switchTapBarView
 {
     if (!_switchTapBarView) {
-        _switchTapBarView = [[LTSwitchTapBarView alloc] initWithFrame:CGRectMake(0, 0, 150, 60)];
+        _switchTapBarView = [[LTSwitchTapBarView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 40)];
         _switchTapBarView.center = CGPointMake(self.view.center.x, 80);
-        _switchTapBarView.titleArray = @[@"页面1",@"页面2",@"页面3"];
+        _switchTapBarView.titleArray = @[@"页面1",@"页面2",@"页面3",@"页面4",@"页面5",@"页面6",@"页面7",@"页面8",@"页面9",@"页面10",@"页面11"];
+        _switchTapBarView.titleItemWidth = 60 ;
         _switchTapBarView.delegate = self ;
     }
     
@@ -160,7 +161,7 @@
         //        _switchView.slideDirection = LTSwitchViewSlideDirectionVertical ;
         
         // 每个页面切换周期比例
-        _switchView.percentPageSlidCycle = 1.0 ;
+//        _switchView.percentPageSlidCycle = 1.0 ;
         
         // 头部设置
         _switchView.headerView = [[UIView alloc] initWithFrame:CGRectMake(100, 100, self.view.bounds.size.width, 200)];

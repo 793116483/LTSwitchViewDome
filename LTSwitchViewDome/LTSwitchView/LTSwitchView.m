@@ -59,6 +59,7 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate ,LTSwi
 
 //【2.7】每页切换周期比例
 @property (nonatomic , assign)CGFloat tmpPercentPageSlidCycle ;
+@property (nonatomic , assign) CGFloat percentPageSlidCycle ;
 
 
 /**
@@ -266,12 +267,12 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate ,LTSwi
         [self viewOrVcDidDisAppear];
     }
     
-    // 正在滑动的位置告诉代理
-    [self viewOrVcPageChanging];
-    
     if (self.isNeedNoticePageChanged == NO ) { // 说明是外面设置了currentPageIndex
         return ;
     }
+    
+    // 正在滑动的位置告诉代理
+    [self viewOrVcPageChanging];
     
     if (self.slideLoaction < self.minSlideLocation || self.slideLoaction > self.maxSlideLocation) {
         [self calculateSlideDirectionWithPageIndex:self.currentPageIndex];

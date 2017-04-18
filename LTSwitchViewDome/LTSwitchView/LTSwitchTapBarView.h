@@ -41,7 +41,7 @@
 /**
     【1.2】当前选中的位置 (0...n-1) ，默认 = 0
 */
-@property (nonatomic , assign)NSInteger selectionIndex ;
+@property (nonatomic , readonly)NSInteger selectionIndex ;
 /**
     【1.3】move indicator to location 范围(0.0 ~ 1.0)，设置该属性表示 指示器 移动到的 位置占总
           cotnetOfSize.width比例，需要时 用户自已设置。
@@ -109,7 +109,7 @@
     【 4 】分割线 相关属性
 */
 /**
-    【4.1】top 分割线 的颜色；默认 = UIColorFromRGB(0xeeeeee)
+    【4.1】top 分割线 的颜色；默认 = UIColorFromRGB(0xdddddd)
  */
 @property (nonatomic , strong)UIColor * topLineColor ;
 /**
@@ -117,7 +117,7 @@
  */
 @property (nonatomic , assign)CGFloat   topLineHeight ;
 /**
-    【4.3】bottom 分割线 的颜色；默认 = UIColorFromRGB(0xeeeeee)
+    【4.3】bottom 分割线 的颜色；默认 = UIColorFromRGB(0xdddddd)
  */
 @property (nonatomic , strong)UIColor * bottomLineColor ;
 /**

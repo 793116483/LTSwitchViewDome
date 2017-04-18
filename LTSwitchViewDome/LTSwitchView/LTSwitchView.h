@@ -87,7 +87,7 @@ typedef enum : NSUInteger { // 方向枚举
 
 // 4.2 每页切换周期比例：滑动到了 (itemSize.width or itemSize.height)*percentPageSlidCycle 的位置 变更 currentPageIndex 记录的下标，调用代理方法通知代理改变页面。
 //【 0.0 <= percentPageSlidCycle <= 1.0 】, 默认为 0.5（即滑到一半时切换页面） 。
-@property (nonatomic , assign) CGFloat percentPageSlidCycle ;
+//@property (nonatomic , assign) CGFloat percentPageSlidCycle ;
 
 // 4.2 设置、添加 和 删除 对象方法
 //*【 如果 UIViewController 的 view 里面有多个 UIScrollView or UIScrollView 子类对象，那么如果需要上下滑动时整体的跟着 动，那么以最后添加的为准，如果view.subviews里面只有一个这样的对象，可以不用注意 】。
