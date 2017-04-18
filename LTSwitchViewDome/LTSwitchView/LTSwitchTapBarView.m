@@ -75,6 +75,8 @@
 
     
     self.indicatorView.frame = CGRectMake(0, self.contentView.frame.size.height, self.selectionIndicatorWidht, self.selectionIndicatorHeight);
+    CGFloat centerX = self.titleItemWidth * self.selectionIndex + self.titleItemWidth / 2;
+    self.indicatorView.center = CGPointMake(centerX, self.indicatorView.center.y);
     
     [self setupTitleButtonsSomeProperty];
     
@@ -104,9 +106,10 @@
     if (!self.shouldAnimateUserSelection) {
         return ;
     }
-    CGFloat minMoveToLocation = self.selectionIndicatorWidht / 2.0 ;
-    CGFloat maxOffsetLocation = self.scrollView.contentSize.width - self.selectionIndicatorWidht ;
+    CGFloat minMoveToLocation = self.titleItemWidth / 2.0 ;
+    CGFloat maxOffsetLocation = self.scrollView.contentSize.width - self.titleItemWidth ;
     CGFloat indicatorMoveTo = maxOffsetLocation * moveIndicatorToLocation + minMoveToLocation;
+    
     self.indicatorView.center = CGPointMake(indicatorMoveTo, self.indicatorView.center.y);
     
     self.needMoveIndicator = NO ;
@@ -131,7 +134,11 @@
 
 -(void)moveIndicatorToIndex:(NSInteger)index
 {
-    CGFloat indicatorMoveTo = self.titleItemWidth * index + self.titleItemWidth / 2;
+    if (index >= self.contentView.subviews.count) {
+        return ;
+    }
+    UIView * btn = self.contentView.subviews[index];
+    CGFloat indicatorMoveTo = btn.center.x ;
     
     if (self.isShouldAnimateUserSelection) {
         [UIView animateWithDuration:0.25 animations:^{
@@ -183,10 +190,10 @@
     if (self.scrollView.contentOffset.x != contentOffsetX) {
         [UIView animateWithDuration:0.25 animations:^{
             self.scrollView.contentOffset = CGPointMake(contentOffsetX, 0);
-            if (self.isNeedMoveIndicator) {
-                [self moveIndicatorToIndex:index];
-            }
         }];
+        if (self.isNeedMoveIndicator) {
+            [self moveIndicatorToIndex:index];
+        }
     }
     else if (self.isNeedMoveIndicator){
         [self moveIndicatorToIndex:index];
