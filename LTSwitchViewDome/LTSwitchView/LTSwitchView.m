@@ -57,9 +57,6 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate ,LTSwi
 //【2.6】将要消失时 的某个页面（即 刚好开始滑动 时这一刻当前页面就有可能消失，同时另一个页面 将要出现）
 @property (nonatomic , weak)id willDisAppearSubViewOrVc ;
 
-//【2.7】每页切换周期比例
-@property (nonatomic , assign)CGFloat tmpPercentPageSlidCycle ;
-@property (nonatomic , assign) CGFloat percentPageSlidCycle ;
 
 
 /**
@@ -93,7 +90,7 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate ,LTSwi
         self.isNeedScrollHeaderViewFromGesture = YES ;
         self.headerViewSlideEnabled = YES ;
         self.headerViewAlwayShowSettingEffective = YES ;
-        self.tmpPercentPageSlidCycle = 0.5 ;
+        self.percentPageSlidCycle = 0.5 ;
         
         self.minSlideLocation = 0 ;
         self.maxSlideLocation = -1 ;
@@ -303,14 +300,21 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate ,LTSwi
 {
     NSInteger pageIndex = 0;
     
+    // 向左向下为 1 ，向右向上为 2
+    CGFloat   offset = self.slideLoaction - self.startLoaction ;
+    
     if (self.slideDirection == LTSwitchViewSlideDirectionHorizontal) {
-        pageIndex = (NSInteger)((self.slideLoaction + self.itemSize.width * self.tmpPercentPageSlidCycle)/self.itemSize.width);
+        pageIndex = (NSInteger)(self.startLoaction / self.itemSize.width);
+        CGFloat tmpPageSlidCycle = self.itemSize.width * self.percentPageSlidCycle ;
+        pageIndex += (NSInteger)(offset / tmpPageSlidCycle);
     }
     else{
-        pageIndex = (NSInteger)((self.slideLoaction + self.itemSize.height * self.tmpPercentPageSlidCycle)/self.itemSize.height);
+        pageIndex = (NSInteger)(self.startLoaction / self.itemSize.height);
+        CGFloat tmpPageSlidCycle = self.itemSize.height * self.percentPageSlidCycle ;
+        pageIndex += (NSInteger)(offset / tmpPageSlidCycle);
     }
     
-    if (pageIndex == _currentPageIndex || pageIndex >= self.childViewsOrViewControllers.count) {
+    if (pageIndex == _currentPageIndex || pageIndex >= self.childViewsOrViewControllers.count ||  pageIndex < 0) {
         return ;
     }
     _currentPageIndex = pageIndex;
@@ -706,14 +710,12 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate ,LTSwi
 {
     _percentPageSlidCycle = percentPageSlidCycle ;
     
-    if (_percentPageSlidCycle < 0.0 ) {
-        _percentPageSlidCycle = 0.0 ;
+    if (_percentPageSlidCycle < 0.5 ) {
+        _percentPageSlidCycle = 0.5 ;
     }
     else if (_percentPageSlidCycle > 1.0){
         _percentPageSlidCycle = 1.0 ;
     }
-    
-    _tmpPercentPageSlidCycle = 1.0 - _percentPageSlidCycle ;
 }
 
 -(void)setSlideDirection:(LTSwitchViewSlideDirection)slideDirection

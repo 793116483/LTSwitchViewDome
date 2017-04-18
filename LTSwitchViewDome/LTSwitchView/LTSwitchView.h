@@ -28,7 +28,7 @@ typedef enum : NSUInteger { // 方向枚举
 // 2.某个 subViewOrVc (view 或 viewController) 将要出现 时通知代理
 -(void)switchView:(LTSwitchView *)switchView willAppearSubViewOrVc:(id)subViewOrVc ;
 
-// 3.切换页面的 过程变动 floatPageIndex ：页面切换移动过程占总共可以移动的距离比例；范围：( 0 ~ 1.0 )
+// 3.切换页面的 过程变动 floatPageIndex ：页面切换移动过程占 总共可以移动距离 的比例；范围：( 0 ~ 1.0 )
 -(void)switchView:(LTSwitchView *)switchView pageIndexChanging:(CGFloat)floatPageIndex ;
 // 4.切换页面 时通知代理
 -(void)switchView:(LTSwitchView *)switchView pageIndexChanged:(NSInteger)currentPageIndex ;
@@ -86,8 +86,8 @@ typedef enum : NSUInteger { // 方向枚举
 @property (nonatomic , assign) CGSize itemSize ;
 
 // 4.2 每页切换周期比例：滑动到了 (itemSize.width or itemSize.height)*percentPageSlidCycle 的位置 变更 currentPageIndex 记录的下标，调用代理方法通知代理改变页面。
-//【 0.0 <= percentPageSlidCycle <= 1.0 】, 默认为 0.5（即滑到一半时切换页面） 。
-//@property (nonatomic , assign) CGFloat percentPageSlidCycle ;
+//【 0.5 <= percentPageSlidCycle <= 1.0 】, 默认为 0.5（即滑到一个页面一半时切换页面，相对于 itemSize.width or height 的比列） 。
+@property (nonatomic , assign) CGFloat percentPageSlidCycle ;
 
 // 4.2 设置、添加 和 删除 对象方法
 //*【 如果 UIViewController 的 view 里面有多个 UIScrollView or UIScrollView 子类对象，那么如果需要上下滑动时整体的跟着 动，那么以最后添加的为准，如果view.subviews里面只有一个这样的对象，可以不用注意 】。
