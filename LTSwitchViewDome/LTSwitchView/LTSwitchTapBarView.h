@@ -6,8 +6,6 @@
 //  Copyright © 2017年 yiniu. All rights reserved.
 //  页面切换的 tapBar
 
-
-
 //十六进制的颜色转为iOS可用的UIColor
 #define UIColorFromRGB(hexValue) [UIColor colorWithRed:((float)((hexValue & 0xFF0000) >> 16))/255.0 green:((float)((hexValue & 0xFF00) >> 8))/255.0 blue:((float)(hexValue & 0xFF))/255.0 alpha:1.0]
 
@@ -15,7 +13,15 @@
 
 
 
+
 #import <UIKit/UIKit.h>
+
+
+typedef enum : NSUInteger {
+    LTSwitchTapBarViewSlidDirectionHorizontal,  // 默认水平方向
+    LTSwitchTapBarViewSlidDirectionVertical,    // 垂直方向
+} LTSwitchTapBarViewSlidDirection;
+
 
 
 @class LTSwitchTapBarView ;
@@ -43,11 +49,11 @@
 */
 @property (nonatomic , assign)NSInteger selectionIndex ;
 /**
-    【1.3】move indicator to location 范围(0.0 ~ 1.0)，设置该属性表示 指示器 移动到的 位置占总
+    【1.3】move indicator to progress 范围(0.0 ~ 1.0)，设置该属性表示 指示器 移动到的 位置占总
           cotnetOfSize.width比例，需要时 用户自已设置。
           例如：n = 2，indicator 滑动到两个 title 中间，用户只需设置 0.5 就能达到效果。
  */
-@property (nonatomic , assign)CGFloat   moveIndicatorToLocation ;
+@property (nonatomic , assign)CGFloat   moveIndicatorProgress ;
 /**
     【1.4】通常不被选中状态下 title 颜色值 ，默认颜色 = UIColorFromRGB(0x666666)
  */
@@ -83,7 +89,6 @@
           恒等 = CGSize( titleItemWidth * count , self.bounds.size.height - topLineHeight - bottomLineHeight)，
  */
 @property (nonatomic , assign) CGSize   contentSize ;
-
 
 
 
@@ -132,7 +137,14 @@
 
 
 /**
-    【 5 】代理 , 默认是当前 LTSwitchView 对象
+    【 5 】滑动方向，默认是 水平方向
+ */
+//@property (nonatomic , assign)LTSwitchTapBarViewSlidDirection slidDirection ;
+
+
+
+/**
+    【 6 】代理 , 如果当前对象 是集成在 LTSwitchView 类里面，则默认是当前 LTSwitchView 对象
  */
 @property (nonatomic , weak)id<LTSwitchTapBarViewDelegate> delegate ;
 
