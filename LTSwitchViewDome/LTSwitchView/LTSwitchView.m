@@ -42,6 +42,7 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate ,LTSwi
 @property (nonatomic , assign) BOOL isWillAppear ;
 //【2.4.2】collectionView 将要开始滑动时 记录每次的 初始位置值
 @property (nonatomic , assign) CGFloat startLoaction ;
+@property (nonatomic , assign) CGFloat startPageLocation ;
 //【2.4.3】collectionView 的 (contentOffset.x or contentOffset.y)由 slideDirection 滑动方向决定
 @property (nonatomic , assign) CGFloat slideLoaction ;
 //【2.4.4】值 = headerView.height - headerViewAlwayShowHeightWhenMoveUp
@@ -221,6 +222,7 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate ,LTSwi
     self.isNeedNoticePageChanged = YES ;
     self.isWillAppear = YES ;
     self.startLoaction = self.slideLoaction ;
+    self.startPageLocation = self.slideLoaction ;
     NSLog(@"开始手动滑动 === %f",self.slideLoaction);
 }
 
@@ -301,22 +303,27 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate ,LTSwi
     NSInteger pageIndex = 0;
     
     // 向左向下为 1 ，向右向上为 2
-    CGFloat   offset = self.slideLoaction - self.startLoaction ;
+    CGFloat offset = self.slideLoaction - self.startPageLocation ;
+    CGFloat pageLocation = 0 ;
     
     if (self.slideDirection == LTSwitchViewSlideDirectionHorizontal) {
-        pageIndex = (NSInteger)(self.startLoaction / self.itemSize.width);
+        pageIndex = (NSInteger)(self.startPageLocation / self.itemSize.width);
         CGFloat tmpPageSlidCycle = self.itemSize.width * self.percentPageSlidCycle ;
         pageIndex += (NSInteger)(offset / tmpPageSlidCycle);
+        pageLocation = pageIndex * self.itemSize.width ;
     }
     else{
         pageIndex = (NSInteger)(self.startLoaction / self.itemSize.height);
         CGFloat tmpPageSlidCycle = self.itemSize.height * self.percentPageSlidCycle ;
         pageIndex += (NSInteger)(offset / tmpPageSlidCycle);
+        pageLocation = pageIndex * self.itemSize.height ;
     }
     
     if (pageIndex == _currentPageIndex || pageIndex >= self.childViewsOrViewControllers.count ||  pageIndex < 0) {
         return ;
     }
+    self.startPageLocation = pageLocation ;
+    
     _currentPageIndex = pageIndex;
     _currentSubViewOrVc = self.childViewsOrViewControllers[_currentPageIndex];
     
