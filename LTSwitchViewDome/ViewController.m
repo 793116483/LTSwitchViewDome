@@ -122,7 +122,7 @@
 -(void)switchView:(LTSwitchView *)switchView pageIndexChanging:(CGFloat)floatPageIndex
 {
     NSLog(@"===============移动位置: 移动到的位置占总的可以移动的距离为 %f%%",floatPageIndex*100);
-    self.switchTapBarView.moveIndicatorToLocation = floatPageIndex ;
+    self.switchTapBarView.moveIndicatorProgress = floatPageIndex ;
 }
 -(void)switchView:(LTSwitchView *)switchView willAppearSubViewOrVc:(id)subViewOrVc
 {
@@ -146,8 +146,10 @@
         _switchTapBarView.titleItemWidth = 80 ;
         _switchTapBarView.selectionIndicatorWidht = 40 ;
         _switchTapBarView.delegate = self ;
+        _switchTapBarView.selectionIndicatorColor = [UIColor redColor];
+        _switchTapBarView.titleColorSelection = [UIColor redColor];
 //        _switchTapBarView.shouldAnimateUserSelection = NO ;
-//        _switchTapBarView.reservedAlwaysShowItemWidthMultiple = 3 ;
+        _switchTapBarView.reservedAlwaysShowItemWidthMultiple = 3 ;
 //        _switchTapBarView.userDraggable = NO ;
 //        _switchTapBarView.bottomLineHeight = 10.0 ;
     }

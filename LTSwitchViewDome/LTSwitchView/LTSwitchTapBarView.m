@@ -101,14 +101,14 @@
     }
 }
 
--(void)moveIndicatorWithLocation:(CGFloat)moveIndicatorToLocation
+-(void)moveIndicatorWithProgress:(CGFloat)moveIndicatorProgress
 {
     if (!self.shouldAnimateUserSelection) {
         return ;
     }
     CGFloat minMoveToLocation = self.titleItemWidth / 2.0 ;
     CGFloat maxOffsetLocation = self.scrollView.contentSize.width - self.titleItemWidth ;
-    CGFloat indicatorMoveTo = maxOffsetLocation * moveIndicatorToLocation + minMoveToLocation;
+    CGFloat indicatorMoveTo = maxOffsetLocation * moveIndicatorProgress + minMoveToLocation;
     
     self.indicatorView.center = CGPointMake(indicatorMoveTo, self.indicatorView.center.y);
     
@@ -300,18 +300,18 @@
     _selectionBtn = selectionBtn ;
     _selectionBtn.selected = YES ;
 }
--(void)setMoveIndicatorToLocation:(CGFloat)moveIndicatorToLocation
+-(void)setMoveIndicatorProgress:(CGFloat)moveIndicatorProgress
 {
-    if (moveIndicatorToLocation < 0 ) {
-        moveIndicatorToLocation = 0.0 ;
+    if (moveIndicatorProgress < 0 ) {
+        moveIndicatorProgress = 0.0 ;
     }
-    else if (moveIndicatorToLocation > 1.0){
-        moveIndicatorToLocation = 1.0 ;
+    else if (moveIndicatorProgress > 1.0){
+        moveIndicatorProgress = 1.0 ;
     }
     
-    _moveIndicatorToLocation = moveIndicatorToLocation ;
+    _moveIndicatorProgress = moveIndicatorProgress ;
     
-    [self moveIndicatorWithLocation:moveIndicatorToLocation];
+    [self moveIndicatorWithProgress:moveIndicatorProgress];
 }
 -(void)setTitleColorNormal:(UIColor *)titleColorNormal
 {
