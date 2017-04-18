@@ -20,19 +20,15 @@
 
 @property (nonatomic , weak) UIButton * selectionBtn ;
 
-// 0.0 ~ 1.0
-@property (nonatomic , assign) CGFloat startIndicatorLocation ;
 
-@property (nonatomic , getter=isSetedContentSize) BOOL setedContentSize ;
 @property (nonatomic , getter=isSetedTitleItemWidth) BOOL setedTitleItemWidth ;
+@property (nonatomic , getter=isSetedSelectionIndicatorWidht) BOOL setedSelectionIndicatorWidht ;
 
 
 @end
 
 @implementation LTSwitchTapBarView
-@synthesize selectionIndex = _selectionIndex ;
-
-#define reservedAlwaysShowItemMultiple 2.5
+//@synthesize selectionIndex = _selectionIndex ;
 
 -(instancetype)initWithFrame:(CGRect)frame
 {
@@ -48,10 +44,11 @@
         _titleColorNormal = UIColorFromRGB(0x666666) ;
         _titleColorSelection = UIColorFromRGB(0x333333) ;
         _titleFontSize = 16.0 ;
+        self.reservedAlwaysShowItemWidthMultiple = 2.0 ;
         self.userDraggable = YES ;
         _selectionIndicatorHeight = 2.0 ;
         self.selectionIndicatorColor = UIColorFromRGB(0x333333) ;
-//        self.shouldAnimateUserSelection = YES ;
+        self.shouldAnimateUserSelection = YES ;
         self.topLineColor = UIColorFromRGB(0xdddddd) ;
         _topLineHeight = 0.5 ;
         self.bottomLineColor = UIColorFromRGB(0xdddddd) ;
@@ -68,11 +65,12 @@
     self.topLine.frame = CGRectMake(0, 0, self.bounds.size.width, self.topLineHeight);
     
     self.scrollView.frame = CGRectMake(0, self.topLineHeight, self.bounds.size.width, self.bounds.size.height - self.topLineHeight - self.bottomLineHeight);
-    self.scrollView.contentSize = self.contentSize ;
+    self.contentSize = CGSizeMake(_titleItemWidth * self.titleArray.count, self.scrollView.frame.size.height);
     
     self.bottomLine.frame = CGRectMake(0, self.frame.size.height - self.bottomLineHeight, self.bounds.size.width, self.bottomLineHeight);
     
     self.contentView.frame = CGRectMake(0, 0, self.contentSize.width, self.scrollView.frame.size.height - self.selectionIndicatorHeight);
+
     
     self.indicatorView.frame = CGRectMake(0, self.contentView.frame.size.height, self.selectionIndicatorWidht, self.selectionIndicatorHeight);
     
@@ -106,8 +104,8 @@
     CGFloat indicatorMoveTo = maxOffsetLocation * moveIndicatorToLocation + minMoveToLocation;
     self.indicatorView.center = CGPointMake(indicatorMoveTo, self.indicatorView.center.y);
     
-    NSInteger index = indicatorMoveTo / self.titleItemWidth ;
-    self.selectionIndex = index ;
+//    NSInteger index = indicatorMoveTo / self.titleItemWidth ;
+//    self.selectionIndex = index ;
 }
 
 -(void)clickedBtn:(UIButton *)btn
@@ -119,9 +117,14 @@
     self.selectionIndex = btn.tag ;
     CGFloat indicatorMoveTo = self.titleItemWidth * btn.tag + self.titleItemWidth / 2;
 
-    [UIView animateWithDuration:0.25 animations:^{
+    if (self.isShouldAnimateUserSelection) {
+        [UIView animateWithDuration:0.25 animations:^{
+            self.indicatorView.center = CGPointMake(indicatorMoveTo, self.indicatorView.center.y);
+        }];
+    }
+    else{
         self.indicatorView.center = CGPointMake(indicatorMoveTo, self.indicatorView.center.y);
-    }];
+    }
     
     if ([self.delegate respondsToSelector:@selector(switchTapBarView:selectionIndex:)]) {
         [self.delegate switchTapBarView:self selectionIndex:btn.tag];
@@ -130,6 +133,10 @@
 
 -(void)moveIndicatorTopIndex:(NSInteger)index
 {
+    if (!self.userDraggable) {
+        return ;
+    }
+    
     if (_titleArray.count <= index) {
         index = _titleArray.count ;
     }
@@ -140,9 +147,11 @@
 
     // 1左<-；2右->
     NSInteger direction = index < self.selectionIndex ? 1 : 2 ;
+    CGFloat reservedAlwaysShowItemWidth = self.titleItemWidth * (self.reservedAlwaysShowItemWidthMultiple + 0.5 ) ;
+    
     if (direction == 2) {
-        if (currentShowWidth < indicatorMoveTo + self.titleItemWidth*reservedAlwaysShowItemMultiple) {
-            contentOffsetX += (indicatorMoveTo + self.titleItemWidth*reservedAlwaysShowItemMultiple) - currentShowWidth;
+        if (currentShowWidth < indicatorMoveTo + reservedAlwaysShowItemWidth) {
+            contentOffsetX += (indicatorMoveTo + reservedAlwaysShowItemWidth) - currentShowWidth;
         }
         
         if (contentOffsetX + self.scrollView.frame.size.width > self.contentSize.width) {
@@ -150,8 +159,8 @@
         }
     }
     else{
-        if (contentOffsetX > indicatorMoveTo - self.titleItemWidth*reservedAlwaysShowItemMultiple) {
-            contentOffsetX = indicatorMoveTo - self.titleItemWidth*reservedAlwaysShowItemMultiple ;
+        if (contentOffsetX > indicatorMoveTo - reservedAlwaysShowItemWidth) {
+            contentOffsetX = indicatorMoveTo - reservedAlwaysShowItemWidth ;
         }
         
         if (contentOffsetX < 0) {
@@ -164,8 +173,6 @@
             self.scrollView.contentOffset = CGPointMake(contentOffsetX, 0);
         }];
     }
-    
-    self.selectionBtn.selected = YES ;
 }
 
 #pragma mark - view getter 方法
@@ -238,15 +245,13 @@
     
     if (!self.isSetedTitleItemWidth && titleArray.count) {
         _titleItemWidth = self.frame.size.width / titleArray.count ;
-        self.selectionIndicatorWidht = _titleItemWidth ;
+        
+        if (!self.isSetedSelectionIndicatorWidht) {
+            _selectionIndicatorWidht = _titleItemWidth ;
+        }
     }
-    if (!self.isSetedContentSize && titleArray.count) {
-        _contentSize = CGSizeMake(_titleItemWidth * titleArray.count, self.scrollView.frame.size.height);
-    }
-    
     
     [self setNeedsLayout];
-    
     
 }
 -(void)setSelectionIndex:(NSInteger)selectionIndex
@@ -267,14 +272,6 @@
     
     _selectionBtn = selectionBtn ;
     _selectionBtn.selected = YES ;
-    
-    CGFloat maxOffsetLocation = self.scrollView.contentSize.width - self.selectionIndicatorWidht ;
-    if (maxOffsetLocation > 0) {
-        self.startIndicatorLocation = (selectionBtn.tag * self.titleItemWidth) / maxOffsetLocation ;
-    }
-    else{
-        self.startIndicatorLocation = 0.0 ;
-    }
 }
 -(void)setMoveIndicatorToLocation:(CGFloat)moveIndicatorToLocation
 {
@@ -304,9 +301,11 @@
 -(void)setTitleItemWidth:(CGFloat)titleItemWidth
 {
     _titleItemWidth = titleItemWidth ;
+    
     self.setedTitleItemWidth = YES ;
-    _contentSize = CGSizeMake(_titleItemWidth * self.titleArray.count, self.scrollView.frame.size.height);
-    self.selectionIndicatorWidht = titleItemWidth ;
+    if (!self.isSetedSelectionIndicatorWidht) {
+        _selectionIndicatorWidht = titleItemWidth ;
+    }
     
     [self setNeedsLayout];
 }
@@ -316,6 +315,13 @@
     
     [self setupTitleButtonsSomeProperty];
 }
+-(void)setReservedAlwaysShowItemWidthMultiple:(CGFloat)reservedAlwaysShowItemWidthMultiple
+{
+    if (reservedAlwaysShowItemWidthMultiple < 0) {
+        reservedAlwaysShowItemWidthMultiple = - reservedAlwaysShowItemWidthMultiple ;
+    }
+    _reservedAlwaysShowItemWidthMultiple = reservedAlwaysShowItemWidthMultiple ;
+}
 -(void)setUserDraggable:(BOOL)userDraggable
 {
     _userDraggable = userDraggable ;
@@ -324,7 +330,6 @@
 -(void)setContentSize:(CGSize)contentSize
 {
     _contentSize = contentSize ;
-    self.setedContentSize = YES ;
     
     self.scrollView.contentSize = contentSize ;
 }
@@ -337,6 +342,7 @@
 -(void)setSelectionIndicatorWidht:(CGFloat)selectionIndicatorWidht
 {
     _selectionIndicatorWidht = selectionIndicatorWidht ;
+    self.setedSelectionIndicatorWidht = YES ;
     self.indicatorView.bounds = CGRectMake(0, 0, selectionIndicatorWidht, self.selectionIndicatorHeight);
 }
 -(void)setSelectionIndicatorColor:(UIColor *)selectionIndicatorColor

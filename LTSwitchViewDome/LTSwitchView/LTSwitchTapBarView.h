@@ -41,7 +41,7 @@
 /**
     【1.2】当前选中的位置 (0...n-1) ，默认 = 0
 */
-@property (nonatomic , readonly)NSInteger selectionIndex ;
+@property (nonatomic , assign)NSInteger selectionIndex ;
 /**
     【1.3】move indicator to location 范围(0.0 ~ 1.0)，设置该属性表示 指示器 移动到的 位置占总
           cotnetOfSize.width比例，需要时 用户自已设置。
@@ -64,7 +64,11 @@
     【1.7】每个 title 字体大小，默认 = 16.0
  */
 @property (nonatomic , assign) CGFloat  titleFontSize ;
-
+/**
+    【1.8】值表示 指示器移动到的位置 左边或右边总是会预留 titleItemWidth * reservedAlwaysShowItemWidthMultiple 的大小暴露在可视区域中，默认 = 2.0 ;
+        reservedAlwaysShowItemWidthMultiple >= 0 永恒
+ */
+@property (nonatomic , assign) CGFloat  reservedAlwaysShowItemWidthMultiple ;
 
 
 /**
@@ -76,7 +80,7 @@
 @property (nonatomic , getter=isUserDraggable) BOOL userDraggable ;
 /**
     【2.2】可以拖动的范围大小，值的大小随 titleItemWidth 改变而改变
-          默认 = CGSize( titleItemWidth * count , self.bounds.size.height - 1)，
+          恒等 = CGSize( titleItemWidth * count , self.bounds.size.height - topLineHeight - bottomLineHeight)，
  */
 @property (nonatomic , assign) CGSize   contentSize ;
 
@@ -91,7 +95,7 @@
  */
 @property (nonatomic , assign)CGFloat   selectionIndicatorHeight ;
 /**
-    【3.2】指示器 的宽度；默认 = 8.0
+    【3.2】指示器 的宽度；默认 = titleItemWidth
  */
 @property (nonatomic , assign)CGFloat   selectionIndicatorWidht ;
 /**
@@ -101,7 +105,7 @@
 /**
     【3.4】当用户点击了某一块区域 指示器 move 时是否需要做动画，默认 = YES
  */
-//@property (nonatomic , getter=isShouldAnimateUserSelection) BOOL shouldAnimateUserSelection ;
+@property (nonatomic , getter=isShouldAnimateUserSelection) BOOL shouldAnimateUserSelection ;
 
 
 
@@ -128,7 +132,7 @@
 
 
 /**
-    【 5 】代理
+    【 5 】代理 , 默认是当前 LTSwitchView 对象
  */
 @property (nonatomic , weak)id<LTSwitchTapBarViewDelegate> delegate ;
 

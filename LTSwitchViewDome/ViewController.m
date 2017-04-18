@@ -113,7 +113,7 @@
 {
     NSLog(@"=============== 选中了 %@ 对象 , 下标 = %ld",NSStringFromClass([switchView.currentSubViewOrVc class]),currentPageIndex);
     
-//    self.switchTapBarView.selectionIndex = currentPageIndex ;
+    self.switchTapBarView.selectionIndex = currentPageIndex ;
 }
 -(void)switchView:(LTSwitchView *)switchView subViewOrVcLoadingDataIfNeed:(id)subViewOrVc
 {
@@ -145,6 +145,9 @@
         _switchTapBarView.titleArray = @[@"页面1",@"页面2",@"页面3",@"页面4",@"页面5",@"页面6",@"页面7",@"页面8",@"页面9",@"页面10",@"页面11"];
         _switchTapBarView.titleItemWidth = 60 ;
         _switchTapBarView.delegate = self ;
+//        _switchTapBarView.shouldAnimateUserSelection = NO ;
+        _switchTapBarView.reservedAlwaysShowItemWidthMultiple = -1 ;
+//        _switchTapBarView.bottomLineHeight = 10.0 ;
     }
     
     return _switchTapBarView ;
