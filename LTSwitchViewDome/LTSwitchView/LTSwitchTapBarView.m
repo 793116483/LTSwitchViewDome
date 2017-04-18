@@ -20,6 +20,7 @@
 
 @property (nonatomic , weak) UIButton * selectionBtn ;
 
+@property (nonatomic , getter=isNeedMoveIndicator) BOOL needMoveIndicator ;
 
 @property (nonatomic , getter=isSetedTitleItemWidth) BOOL setedTitleItemWidth ;
 @property (nonatomic , getter=isSetedSelectionIndicatorWidht) BOOL setedSelectionIndicatorWidht ;
@@ -54,6 +55,7 @@
         self.bottomLineColor = UIColorFromRGB(0xdddddd) ;
         _bottomLineHeight = 0.5 ;
         
+        self.needMoveIndicator = YES ;
     }
     return self ;
 }
@@ -99,10 +101,15 @@
 
 -(void)moveIndicatorWithLocation:(CGFloat)moveIndicatorToLocation
 {
+    if (!self.shouldAnimateUserSelection) {
+        return ;
+    }
     CGFloat minMoveToLocation = self.selectionIndicatorWidht / 2.0 ;
     CGFloat maxOffsetLocation = self.scrollView.contentSize.width - self.selectionIndicatorWidht ;
     CGFloat indicatorMoveTo = maxOffsetLocation * moveIndicatorToLocation + minMoveToLocation;
     self.indicatorView.center = CGPointMake(indicatorMoveTo, self.indicatorView.center.y);
+    
+    self.needMoveIndicator = NO ;
     
 //    NSInteger index = indicatorMoveTo / self.titleItemWidth ;
 //    self.selectionIndex = index ;
@@ -114,9 +121,18 @@
         return ;
     }
     
+    self.needMoveIndicator = YES ;
     self.selectionIndex = btn.tag ;
-    CGFloat indicatorMoveTo = self.titleItemWidth * btn.tag + self.titleItemWidth / 2;
+    
+    if ([self.delegate respondsToSelector:@selector(switchTapBarView:selectionIndex:)]) {
+        [self.delegate switchTapBarView:self selectionIndex:btn.tag];
+    }
+}
 
+-(void)moveIndicatorToIndex:(NSInteger)index
+{
+    CGFloat indicatorMoveTo = self.titleItemWidth * index + self.titleItemWidth / 2;
+    
     if (self.isShouldAnimateUserSelection) {
         [UIView animateWithDuration:0.25 animations:^{
             self.indicatorView.center = CGPointMake(indicatorMoveTo, self.indicatorView.center.y);
@@ -125,13 +141,9 @@
     else{
         self.indicatorView.center = CGPointMake(indicatorMoveTo, self.indicatorView.center.y);
     }
-    
-    if ([self.delegate respondsToSelector:@selector(switchTapBarView:selectionIndex:)]) {
-        [self.delegate switchTapBarView:self selectionIndex:btn.tag];
-    }
 }
 
--(void)moveIndicatorTopIndex:(NSInteger)index
+-(void)scrollingToIndex:(NSInteger)index
 {
     if (!self.userDraggable) {
         return ;
@@ -171,7 +183,13 @@
     if (self.scrollView.contentOffset.x != contentOffsetX) {
         [UIView animateWithDuration:0.25 animations:^{
             self.scrollView.contentOffset = CGPointMake(contentOffsetX, 0);
+            if (self.isNeedMoveIndicator) {
+                [self moveIndicatorToIndex:index];
+            }
         }];
+    }
+    else if (self.isNeedMoveIndicator){
+        [self moveIndicatorToIndex:index];
     }
 }
 
@@ -261,8 +279,10 @@
     }
     
     if (selectionIndex < self.contentView.subviews.count) {
-        [self moveIndicatorTopIndex:selectionIndex];
+        [self scrollingToIndex:selectionIndex];
         self.selectionBtn = self.contentView.subviews[selectionIndex] ;
+      
+        self.needMoveIndicator = YES ;
     }
     _selectionIndex = selectionIndex ;
 }

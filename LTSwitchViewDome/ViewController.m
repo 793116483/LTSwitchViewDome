@@ -146,7 +146,8 @@
         _switchTapBarView.titleItemWidth = 60 ;
         _switchTapBarView.delegate = self ;
 //        _switchTapBarView.shouldAnimateUserSelection = NO ;
-        _switchTapBarView.reservedAlwaysShowItemWidthMultiple = -1 ;
+//        _switchTapBarView.reservedAlwaysShowItemWidthMultiple = 3 ;
+//        _switchTapBarView.userDraggable = NO ;
 //        _switchTapBarView.bottomLineHeight = 10.0 ;
     }
     
