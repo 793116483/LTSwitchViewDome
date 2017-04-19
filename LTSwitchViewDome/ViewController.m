@@ -149,7 +149,7 @@
         _switchTapBarView.selectionIndicatorColor = [UIColor redColor];
         _switchTapBarView.titleColorSelection = [UIColor redColor];
 //        _switchTapBarView.shouldAnimateUserSelection = NO ;
-        _switchTapBarView.reservedAlwaysShowItemWidthMultiple = 1 ;
+//        _switchTapBarView.reservedAlwaysShowItemWidthMultiple = 1 ;
 //        _switchTapBarView.userDraggable = NO ;
 //        _switchTapBarView.bottomLineHeight = 10.0 ;
     }
@@ -168,7 +168,7 @@
         //        _switchView.slideDirection = LTSwitchViewSlideDirectionVertical ;
         
         // 每个页面切换周期比例
-        _switchView.percentPageSlidCycle = 1.0 ;
+//        _switchView.percentPageSlidCycle = 1.0 ;
         
         // 头部设置
         _switchView.headerView = [[UIView alloc] initWithFrame:CGRectMake(100, 100, self.view.bounds.size.width, 200)];

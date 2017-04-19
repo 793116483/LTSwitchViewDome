@@ -171,7 +171,7 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate ,LTSwi
         }
         else if( directionUpOrDown == 2 && scrollView.contentOffset.y < self.contentView.contentOffset.y ){ // 向下滑动，
             if (self.contentView.contentOffset.y > 0) {
-                offY *= 1.5 ;
+                offY *= 1.8 ;
             }
             if (offY + self.contentView.contentOffset.y < self.headerViewAlwayShowLocationWhenMoveDown && self.headerViewAlwayShowSettingEffective) {
                 self.contentView.contentOffset = CGPointMake(0, self.headerViewAlwayShowLocationWhenMoveDown);
