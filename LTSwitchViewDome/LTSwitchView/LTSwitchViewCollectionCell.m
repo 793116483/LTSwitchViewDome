@@ -37,10 +37,10 @@
     }
     
     
-//    if (self.scrollView) {
-//        [self.scrollView removeObserver:self forKeyPath:@"contentOffset"];
-//        self.scrollView = nil ;
-//    }
+    if (self.scrollView) {
+        [self.scrollView removeObserver:self forKeyPath:@"contentOffset"];
+        self.scrollView = nil ;
+    }
     
     if ([_viewOrVc isKindOfClass:[UIViewController class]]) {
         UIViewController * controller = (UIViewController *)_viewOrVc ;

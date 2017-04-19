@@ -258,7 +258,28 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate ,LTSwi
 //    NSLog(@"collectionView scrolling ==== %f",scrollView.contentOffset.x);
     // 下面是collection 滑动
     
-    self.isNeedScrollHeaderViewFromGesture = NO ;
+    if (self.slideLoaction < self.minSlideLocation) {
+        if (self.slideDirection == LTSwitchViewSlideDirectionHorizontal) {
+            scrollView.contentOffset = CGPointMake(self.minSlideLocation, scrollView.contentOffset.y);
+        }
+        else{
+            scrollView.contentOffset = CGPointMake(scrollView.contentOffset.x, self.minSlideLocation);
+        }
+        
+        return ;
+    }
+    else if (self.slideLoaction > self.maxSlideLocation){
+        if (self.slideDirection == LTSwitchViewSlideDirectionHorizontal) {
+            scrollView.contentOffset = CGPointMake(self.maxSlideLocation, scrollView.contentOffset.y);
+        }
+        else{
+            scrollView.contentOffset = CGPointMake(scrollView.contentOffset.x, self.maxSlideLocation);
+        }
+        
+        return ;
+    }
+    
+//    self.isNeedScrollHeaderViewFromGesture = NO ;
     if (scrollView.contentOffset.x == (NSInteger)scrollView.contentOffset.x
         && scrollView.contentOffset.x == self.currentPageIndex * self.itemSize.width) {
         self.isNeedScrollHeaderViewFromGesture = YES ;
@@ -272,13 +293,6 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate ,LTSwi
     
     // 正在滑动的位置告诉代理
     [self viewOrVcPageChanging];
-    
-    if (self.slideLoaction < self.minSlideLocation || self.slideLoaction > self.maxSlideLocation) {
-        [self calculateSlideDirectionWithPageIndex:self.currentPageIndex];
-        [self slideToPageIndex:self.currentPageIndex animated:NO];
-        
-        return ;
-    }
     
     if (self.isWillAppear && self.startLoaction != self.slideLoaction) {
         self.isWillAppear = NO ;
@@ -301,29 +315,37 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate ,LTSwi
 -(void)dragging:(UIScrollView *)scrollView
 {
     NSInteger pageIndex = 0;
-    
-    // 向左向下为 1 ，向右向上为 2
     CGFloat offset = self.slideLoaction - self.startPageLocation ;
-    CGFloat pageLocation = 0 ;
+    // 向左向下为 1 ，向右向上为 2
+    NSInteger direction = offset > 0 ? 1 : 2 ;
     
     if (self.slideDirection == LTSwitchViewSlideDirectionHorizontal) {
-        pageIndex = (NSInteger)(self.startPageLocation / self.itemSize.width);
+        pageIndex = (NSInteger)(self.slideLoaction / self.itemSize.width);
         CGFloat tmpPageSlidCycle = self.itemSize.width * self.percentPageSlidCycle ;
-        pageIndex += (NSInteger)(offset / tmpPageSlidCycle);
-        pageLocation = pageIndex * self.itemSize.width ;
+        if (direction == 1 && self.slideLoaction - pageIndex * self.itemSize.width >= tmpPageSlidCycle) {
+            pageIndex = pageIndex + 1 ;
+        }
+        else if (direction == 2 && self.itemSize.width - (self.slideLoaction - pageIndex * self.itemSize.width) < tmpPageSlidCycle) {
+            pageIndex = pageIndex + 1 ;
+        }
     }
     else{
-        pageIndex = (NSInteger)(self.startLoaction / self.itemSize.height);
+        pageIndex = (NSInteger)(self.slideLoaction / self.itemSize.height);
         CGFloat tmpPageSlidCycle = self.itemSize.height * self.percentPageSlidCycle ;
-        pageIndex += (NSInteger)(offset / tmpPageSlidCycle);
-        pageLocation = pageIndex * self.itemSize.height ;
+        if (direction == 1 && self.slideLoaction - pageIndex * self.itemSize.height >= tmpPageSlidCycle) {
+            pageIndex = pageIndex + 1 ;
+        }
+        else if (direction == 2 && self.itemSize.height - (self.slideLoaction - pageIndex * self.itemSize.height) < tmpPageSlidCycle) {
+            pageIndex = pageIndex + 1 ;
+        }
     }
     
     if (pageIndex == _currentPageIndex || pageIndex >= self.childViewsOrViewControllers.count ||  pageIndex < 0) {
         return ;
     }
-    self.startPageLocation = pageLocation ;
     
+    self.startPageLocation = self.slideLoaction ;
+
     _currentPageIndex = pageIndex;
     _currentSubViewOrVc = self.childViewsOrViewControllers[_currentPageIndex];
     
@@ -543,13 +565,11 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate ,LTSwi
 
 -(void)prepareForRefreshData
 {
-    if (self.maxSlideLocation <= 0) {
-        CGFloat itemSize = self.itemSize.width ;
-        if (self.slideDirection == LTSwitchViewSlideDirectionVertical) {
-            itemSize = self.itemSize.height ;
-        }
-        self.maxSlideLocation = itemSize * (self.childViewsOrViewControllers.count - 1) ;
+    CGFloat itemSize = self.itemSize.width ;
+    if (self.slideDirection == LTSwitchViewSlideDirectionVertical) {
+        itemSize = self.itemSize.height ;
     }
+    self.maxSlideLocation = itemSize * (self.childViewsOrViewControllers.count - 1) ;
 }
 
 -(void)refreshAllDataOfCollectionView
