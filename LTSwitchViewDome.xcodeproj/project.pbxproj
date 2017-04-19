@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F254A0D81EA73E62004701C2 /* UIColor+Switch_RGBA_UIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F254A0D71EA73E62004701C2 /* UIColor+Switch_RGBA_UIColor.m */; };
+		F254A0DE1EA77583004701C2 /* LTSwitchTapBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = F254A0DB1EA77583004701C2 /* LTSwitchTapBarView.m */; };
+		F254A0DF1EA77583004701C2 /* UIColor+Switch_RGBA_UIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F254A0DD1EA77583004701C2 /* UIColor+Switch_RGBA_UIColor.m */; };
 		F2CCBECE1EA0F5F10062BFC0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CCBECD1EA0F5F10062BFC0 /* main.m */; };
 		F2CCBED11EA0F5F10062BFC0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CCBED01EA0F5F10062BFC0 /* AppDelegate.m */; };
 		F2CCBED41EA0F5F10062BFC0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CCBED31EA0F5F10062BFC0 /* ViewController.m */; };
@@ -17,7 +18,6 @@
 		F2CCBEDF1EA0F5F10062BFC0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2CCBEDD1EA0F5F10062BFC0 /* LaunchScreen.storyboard */; };
 		F2CCBEEA1EA0F5F10062BFC0 /* LTSwitchViewDomeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CCBEE91EA0F5F10062BFC0 /* LTSwitchViewDomeTests.m */; };
 		F2CCBEF51EA0F5F10062BFC0 /* LTSwitchViewDomeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CCBEF41EA0F5F10062BFC0 /* LTSwitchViewDomeUITests.m */; };
-		F2CCBF0A1EA0FEC80062BFC0 /* LTSwitchTapBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CCBF041EA0FEC80062BFC0 /* LTSwitchTapBarView.m */; };
 		F2CCBF0B1EA0FEC80062BFC0 /* LTSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CCBF061EA0FEC80062BFC0 /* LTSwitchView.m */; };
 		F2CCBF0C1EA0FEC80062BFC0 /* LTSwitchViewCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CCBF081EA0FEC80062BFC0 /* LTSwitchViewCollectionCell.m */; };
 		F2CCBF0D1EA0FEC80062BFC0 /* LTSwitchViewCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2CCBF091EA0FEC80062BFC0 /* LTSwitchViewCollectionCell.xib */; };
@@ -41,8 +41,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		F254A0D61EA73E62004701C2 /* UIColor+Switch_RGBA_UIColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Switch_RGBA_UIColor.h"; sourceTree = "<group>"; };
-		F254A0D71EA73E62004701C2 /* UIColor+Switch_RGBA_UIColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Switch_RGBA_UIColor.m"; sourceTree = "<group>"; };
+		F254A0DA1EA77583004701C2 /* LTSwitchTapBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTSwitchTapBarView.h; sourceTree = "<group>"; };
+		F254A0DB1EA77583004701C2 /* LTSwitchTapBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTSwitchTapBarView.m; sourceTree = "<group>"; };
+		F254A0DC1EA77583004701C2 /* UIColor+Switch_RGBA_UIColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Switch_RGBA_UIColor.h"; sourceTree = "<group>"; };
+		F254A0DD1EA77583004701C2 /* UIColor+Switch_RGBA_UIColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Switch_RGBA_UIColor.m"; sourceTree = "<group>"; };
 		F2CCBEC91EA0F5F10062BFC0 /* LTSwitchViewDome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LTSwitchViewDome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2CCBECD1EA0F5F10062BFC0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F2CCBECF1EA0F5F10062BFC0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -60,8 +62,6 @@
 		F2CCBEF01EA0F5F10062BFC0 /* LTSwitchViewDomeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LTSwitchViewDomeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2CCBEF41EA0F5F10062BFC0 /* LTSwitchViewDomeUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LTSwitchViewDomeUITests.m; sourceTree = "<group>"; };
 		F2CCBEF61EA0F5F10062BFC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F2CCBF031EA0FEC80062BFC0 /* LTSwitchTapBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTSwitchTapBarView.h; sourceTree = "<group>"; };
-		F2CCBF041EA0FEC80062BFC0 /* LTSwitchTapBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTSwitchTapBarView.m; sourceTree = "<group>"; };
 		F2CCBF051EA0FEC80062BFC0 /* LTSwitchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTSwitchView.h; sourceTree = "<group>"; };
 		F2CCBF061EA0FEC80062BFC0 /* LTSwitchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTSwitchView.m; sourceTree = "<group>"; };
 		F2CCBF071EA0FEC80062BFC0 /* LTSwitchViewCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTSwitchViewCollectionCell.h; sourceTree = "<group>"; };
@@ -94,6 +94,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F254A0D91EA77583004701C2 /* LTSwitchTapBarView */ = {
+			isa = PBXGroup;
+			children = (
+				F254A0DA1EA77583004701C2 /* LTSwitchTapBarView.h */,
+				F254A0DB1EA77583004701C2 /* LTSwitchTapBarView.m */,
+				F254A0DC1EA77583004701C2 /* UIColor+Switch_RGBA_UIColor.h */,
+				F254A0DD1EA77583004701C2 /* UIColor+Switch_RGBA_UIColor.m */,
+			);
+			path = LTSwitchTapBarView;
+			sourceTree = "<group>";
+		};
 		F2CCBEC01EA0F5F10062BFC0 = {
 			isa = PBXGroup;
 			children = (
@@ -161,15 +172,12 @@
 		F2CCBF021EA0FEC80062BFC0 /* LTSwitchView */ = {
 			isa = PBXGroup;
 			children = (
-				F2CCBF031EA0FEC80062BFC0 /* LTSwitchTapBarView.h */,
-				F2CCBF041EA0FEC80062BFC0 /* LTSwitchTapBarView.m */,
+				F254A0D91EA77583004701C2 /* LTSwitchTapBarView */,
 				F2CCBF051EA0FEC80062BFC0 /* LTSwitchView.h */,
 				F2CCBF061EA0FEC80062BFC0 /* LTSwitchView.m */,
 				F2CCBF071EA0FEC80062BFC0 /* LTSwitchViewCollectionCell.h */,
 				F2CCBF081EA0FEC80062BFC0 /* LTSwitchViewCollectionCell.m */,
 				F2CCBF091EA0FEC80062BFC0 /* LTSwitchViewCollectionCell.xib */,
-				F254A0D61EA73E62004701C2 /* UIColor+Switch_RGBA_UIColor.h */,
-				F254A0D71EA73E62004701C2 /* UIColor+Switch_RGBA_UIColor.m */,
 			);
 			path = LTSwitchView;
 			sourceTree = "<group>";
@@ -311,13 +319,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F254A0DE1EA77583004701C2 /* LTSwitchTapBarView.m in Sources */,
+				F254A0DF1EA77583004701C2 /* UIColor+Switch_RGBA_UIColor.m in Sources */,
 				F2CCBED41EA0F5F10062BFC0 /* ViewController.m in Sources */,
-				F254A0D81EA73E62004701C2 /* UIColor+Switch_RGBA_UIColor.m in Sources */,
 				F2CCBED11EA0F5F10062BFC0 /* AppDelegate.m in Sources */,
 				F2CCBF0B1EA0FEC80062BFC0 /* LTSwitchView.m in Sources */,
 				F2CCBECE1EA0F5F10062BFC0 /* main.m in Sources */,
 				F2CCBF0C1EA0FEC80062BFC0 /* LTSwitchViewCollectionCell.m in Sources */,
-				F2CCBF0A1EA0FEC80062BFC0 /* LTSwitchTapBarView.m in Sources */,
 				F2CCBEDA1EA0F5F10062BFC0 /* LTSwitchViewDome.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

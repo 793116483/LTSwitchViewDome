@@ -91,7 +91,7 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate ,LTSwi
         self.isNeedScrollHeaderViewFromGesture = YES ;
         self.headerViewSlideEnabled = YES ;
         self.headerViewAlwayShowSettingEffective = YES ;
-        self.percentPageSlidCycle = 0.5 ;
+        self.percentPageSlidCycle = 1.0 ;
         
         self.minSlideLocation = 0 ;
         self.maxSlideLocation = -1 ;
@@ -474,9 +474,26 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate ,LTSwi
 
 -(void)slideToPageIndex:(NSInteger)pageIndex animated:(BOOL)animated
 {
+    if (pageIndex < 0) {
+        pageIndex = 0 ;
+    }
+    
+    [self calculateSlideDirectionWithPageIndex:pageIndex];
+    
+    _currentPageIndex = pageIndex ;
+    
+    if (self.childViewsOrViewControllers.count > pageIndex) {
+        [self setCurrentSubViewOrVc:self.childViewsOrViewControllers[pageIndex]];
+    }
+    else{
+        _currentPageIndex = self.childViewsOrViewControllers.count - 1 ;
+        [self setCurrentSubViewOrVc:self.childViewsOrViewControllers.lastObject];
+    }
+    
     NSIndexPath * indexPath = [NSIndexPath indexPathForRow:pageIndex inSection:0];
     [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:self.scrollPosition animated:animated];
 }
+
 
 
 -(void)newCollectionViewFlowLayoutToCollectionView
@@ -600,21 +617,7 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate ,LTSwi
 #pragma mark - setter & getter
 -(void)setCurrentPageIndex:(NSInteger)currentPageIndex
 {
-    if (currentPageIndex < 0) {
-        currentPageIndex = 0 ;
-    }
-    
-    [self calculateSlideDirectionWithPageIndex:currentPageIndex];
-    
-    _currentPageIndex = currentPageIndex ;
-    
-    if (self.childViewsOrViewControllers.count > currentPageIndex) {
-        [self setCurrentSubViewOrVc:self.childViewsOrViewControllers[currentPageIndex]];
-    }
-    else{
-        _currentPageIndex = self.childViewsOrViewControllers.count - 1 ;
-        [self setCurrentSubViewOrVc:self.childViewsOrViewControllers.lastObject];
-    }
+    [self slideToPageIndex:currentPageIndex animated:YES];
 }
 
 -(void)setCurrentSubViewOrVc:(id)currentSubViewOrVc
@@ -632,7 +635,6 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate ,LTSwi
     }
     
     self.isNeedNoticePageChanged = NO ;
-    [self slideToPageIndex:self.currentPageIndex animated:YES];
 }
 
 -(void)setChildViewsOrViewControllers:(NSMutableArray *)childViewsOrViewControllers

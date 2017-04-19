@@ -86,7 +86,7 @@ typedef enum : NSUInteger { // 方向枚举
 @property (nonatomic , assign) CGSize itemSize ;
 
 // 4.2 每页切换周期比例：滑动到了 (itemSize.width or itemSize.height)*percentPageSlidCycle 的位置 变更 currentPageIndex 记录的下标，调用代理方法通知代理改变页面。
-//【 0.5 <= percentPageSlidCycle <= 1.0 】, 默认为 0.5（即滑到一个页面一半时切换页面，相对于 itemSize.width or height 的比列） 。
+//【 0.5 <= percentPageSlidCycle <= 1.0 】, 默认为 1.0（即滑到一个页面一半时切换页面，相对于 itemSize.width or height 的比列） 。
 @property (nonatomic , assign) CGFloat percentPageSlidCycle ;
 
 // 4.2 设置、添加 和 删除 对象方法
@@ -115,7 +115,11 @@ typedef enum : NSUInteger { // 方向枚举
 -(void)removeViewOrVc:(id)viewOrVc ;
 
 
-// 5.代理
+// 5.移动到 pageIndex 是否需要动画 （可以直接设置 currentPageIndex 移动默认 animated = YES）
+-(void)slideToPageIndex:(NSInteger)pageIndex animated:(BOOL)animated ;
+
+
+// 6.代理
 @property (nonatomic , weak) id<LTSwitchViewDelegate> delegate ;
 
 
