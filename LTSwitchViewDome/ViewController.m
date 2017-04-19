@@ -37,35 +37,35 @@
     [self.switchView addViewOrVcIfNeed:view needRefreshData:NO];
     
     UIView * view2 = [[UIView alloc] init];
-    view.backgroundColor = [UIColor blueColor];
+    view2.backgroundColor = [UIColor blueColor];
     [self.switchView addViewOrVcIfNeed:view2 needRefreshData:NO];
     
     UIView * view3 = [[UIView alloc] init];
-    view.backgroundColor = [UIColor redColor];
+    view3.backgroundColor = [UIColor redColor];
     [self.switchView addViewOrVcIfNeed:view3 needRefreshData:NO];
     
     UIView * view4 = [[UIView alloc] init];
-    view.backgroundColor = [UIColor blueColor];
+    view4.backgroundColor = [UIColor blueColor];
     [self.switchView addViewOrVcIfNeed:view4 needRefreshData:NO];
     
     UIView * view5 = [[UIView alloc] init];
-    view.backgroundColor = [UIColor redColor];
+    view5.backgroundColor = [UIColor redColor];
     [self.switchView addViewOrVcIfNeed:view5 needRefreshData:NO];
     
     UIView * view6 = [[UIView alloc] init];
-    view.backgroundColor = [UIColor blueColor];
+    view6.backgroundColor = [UIColor blueColor];
     [self.switchView addViewOrVcIfNeed:view6 needRefreshData:NO];
     
     UIView * view7 = [[UIView alloc] init];
-    view.backgroundColor = [UIColor redColor];
+    view7.backgroundColor = [UIColor redColor];
     [self.switchView addViewOrVcIfNeed:view7 needRefreshData:NO];
     
     UIView * view8 = [[UIView alloc] init];
-    view.backgroundColor = [UIColor blueColor];
+    view8.backgroundColor = [UIColor blueColor];
     [self.switchView addViewOrVcIfNeed:view8 needRefreshData:NO];
     
     UIView * view9 = [[UIView alloc] init];
-    view.backgroundColor = [UIColor redColor];
+    view9.backgroundColor = [UIColor redColor];
     [self.switchView addViewOrVcIfNeed:view9 needRefreshData:NO];
     
     

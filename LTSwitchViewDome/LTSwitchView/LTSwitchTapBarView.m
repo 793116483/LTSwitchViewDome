@@ -153,6 +153,9 @@
 -(void)scrollingToIndex:(NSInteger)index
 {
     if (!self.userDraggable) {
+        if (self.isNeedMoveIndicator) {
+            [self moveIndicatorToIndex:index];
+        }
         return ;
     }
     
