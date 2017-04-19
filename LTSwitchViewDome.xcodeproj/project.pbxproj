@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F254A0D81EA73E62004701C2 /* UIColor+Switch_RGBA_UIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F254A0D71EA73E62004701C2 /* UIColor+Switch_RGBA_UIColor.m */; };
 		F2CCBECE1EA0F5F10062BFC0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CCBECD1EA0F5F10062BFC0 /* main.m */; };
 		F2CCBED11EA0F5F10062BFC0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CCBED01EA0F5F10062BFC0 /* AppDelegate.m */; };
 		F2CCBED41EA0F5F10062BFC0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CCBED31EA0F5F10062BFC0 /* ViewController.m */; };
@@ -40,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F254A0D61EA73E62004701C2 /* UIColor+Switch_RGBA_UIColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Switch_RGBA_UIColor.h"; sourceTree = "<group>"; };
+		F254A0D71EA73E62004701C2 /* UIColor+Switch_RGBA_UIColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Switch_RGBA_UIColor.m"; sourceTree = "<group>"; };
 		F2CCBEC91EA0F5F10062BFC0 /* LTSwitchViewDome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LTSwitchViewDome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2CCBECD1EA0F5F10062BFC0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F2CCBECF1EA0F5F10062BFC0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -165,6 +168,8 @@
 				F2CCBF071EA0FEC80062BFC0 /* LTSwitchViewCollectionCell.h */,
 				F2CCBF081EA0FEC80062BFC0 /* LTSwitchViewCollectionCell.m */,
 				F2CCBF091EA0FEC80062BFC0 /* LTSwitchViewCollectionCell.xib */,
+				F254A0D61EA73E62004701C2 /* UIColor+Switch_RGBA_UIColor.h */,
+				F254A0D71EA73E62004701C2 /* UIColor+Switch_RGBA_UIColor.m */,
 			);
 			path = LTSwitchView;
 			sourceTree = "<group>";
@@ -307,6 +312,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2CCBED41EA0F5F10062BFC0 /* ViewController.m in Sources */,
+				F254A0D81EA73E62004701C2 /* UIColor+Switch_RGBA_UIColor.m in Sources */,
 				F2CCBED11EA0F5F10062BFC0 /* AppDelegate.m in Sources */,
 				F2CCBF0B1EA0FEC80062BFC0 /* LTSwitchView.m in Sources */,
 				F2CCBECE1EA0F5F10062BFC0 /* main.m in Sources */,

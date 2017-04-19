@@ -7,6 +7,8 @@
 //
 
 #import "LTSwitchTapBarView.h"
+#import "UIColor+Switch_RGBA_UIColor.h"
+
 
 @interface LTSwitchTapBarView ()
 
@@ -41,7 +43,8 @@
         [self.scrollView addSubview:self.contentView];
         [self.scrollView addSubview:self.indicatorView];
         
-        
+        self.transitionTitleColor = YES ;
+        _percentPageSlidCycle = 1.0 ;
         _titleColorNormal = UIColorFromRGB(0x666666) ;
         _titleColorSelection = UIColorFromRGB(0x333333) ;
         _titleFontSize = 16.0 ;
@@ -101,6 +104,63 @@
     }
 }
 
+-(UIColor *)transitionTitleColorWithColorChangeScale:(CGFloat)colorChangeScale
+{
+    NSArray * RGBAValuesNormal = [UIColor switchCurrentUIColorToRGBA:self.titleColorNormal];
+    NSArray * RGBAValuesSelection = [UIColor switchCurrentUIColorToRGBA:self.titleColorSelection];
+    
+    CGFloat offRed = ([RGBAValuesSelection[0] floatValue] - [RGBAValuesNormal[0] floatValue]) * colorChangeScale ;
+    CGFloat offGreen = ([RGBAValuesSelection[1] floatValue] - [RGBAValuesNormal[1] floatValue]) * colorChangeScale ;
+    CGFloat offBlue = ([RGBAValuesSelection[2] floatValue] - [RGBAValuesNormal[2] floatValue]) * colorChangeScale ;
+    CGFloat offAlpha = ([RGBAValuesSelection[3] floatValue] - [RGBAValuesNormal[3] floatValue]) * colorChangeScale ;
+    
+    
+    CGFloat red = [RGBAValuesNormal[0] floatValue] + offRed ;
+    CGFloat green = [RGBAValuesNormal[1] floatValue] + offGreen ;
+    CGFloat blue = [RGBAValuesNormal[2] floatValue] + offBlue ;
+    CGFloat alpha = [RGBAValuesNormal[3] floatValue] + offAlpha ;
+    
+    UIColor * resultColor = [UIColor switchRGBAToUIColor:@[@(red) , @(green) , @(blue) , @(alpha)]];
+    
+    return resultColor ;
+}
+
+-(void)transitionTitleColorProgress
+{
+    CGFloat offset = self.indicatorView.center.x - self.selectionBtn.center.x ;
+    // 向左滑动为 1 ，向右滑动为 2
+    NSInteger direction = offset > 0 ? 1 : 2 ;
+    offset = offset >= 0 ? offset : -offset ;
+    CGFloat moveIndicatorLocation = self.selectionBtn.center.x ;
+    CGFloat tmpPageSlidCycle = self.titleItemWidth * self.percentPageSlidCycle ;
+    NSInteger pageIndex = (NSInteger)(moveIndicatorLocation / tmpPageSlidCycle) ;
+    
+    
+//    NSLog(@"transition pageIndex = %ld , selectionIndex = %ld",pageIndex,self.selectionIndex);
+    if (pageIndex == self.selectionIndex && offset) {
+        CGFloat colorChangeScale = offset / tmpPageSlidCycle ;
+        
+        UIColor * nextBtnColor = [self transitionTitleColorWithColorChangeScale:colorChangeScale];
+        UIColor * currentBtnColor = [self transitionTitleColorWithColorChangeScale:1- colorChangeScale];
+
+        [self.selectionBtn setTitleColor:currentBtnColor forState:UIControlStateSelected];
+        UIButton * btn = nil ;
+        if (direction == 1 && self.contentView.subviews.count > pageIndex + 1) {
+            btn = self.contentView.subviews[pageIndex + 1];
+        }
+        else if (direction == 2 && pageIndex - 1 >= 0){
+            btn = self.contentView.subviews[pageIndex - 1];
+        }
+        
+        if (btn) {
+            [btn setTitleColor:nextBtnColor forState:UIControlStateNormal];
+        }
+        
+//        NSLog(@"transition Color index = %ld %ld , d = %ld , scale = %f",pageIndex,self.selectionIndex,direction,colorChangeScale);
+
+    }
+}
+
 -(void)moveIndicatorWithProgress:(CGFloat)moveIndicatorProgress
 {
     if (!self.shouldAnimateUserSelection) {
@@ -114,8 +174,9 @@
     
     self.needMoveIndicator = NO ;
     
-//    NSInteger index = indicatorMoveTo / self.titleItemWidth ;
-//    self.selectionIndex = index ;
+    if (self.isTransitionTitleColor) {
+        [self transitionTitleColorProgress];
+    }
 }
 
 -(void)clickedBtn:(UIButton *)btn
@@ -287,6 +348,9 @@
     if (selectionIndex == _selectionIndex) {
         return ;
     }
+    if (selectionIndex < 0) {
+        selectionIndex = 0 ;
+    }
     
     if (selectionIndex < self.contentView.subviews.count) {
         [self scrollingToIndex:selectionIndex];
@@ -298,8 +362,14 @@
 }
 -(void)setSelectionBtn:(UIButton *)selectionBtn
 {
+    [_selectionBtn setTitleColor:self.titleColorNormal forState:UIControlStateNormal];
+    [_selectionBtn setTitleColor:self.titleColorNormal forState:UIControlStateHighlighted];
+    [_selectionBtn setTitleColor:self.titleColorSelection forState:UIControlStateSelected];
     _selectionBtn.selected = NO ;
     
+    [selectionBtn setTitleColor:self.titleColorNormal forState:UIControlStateNormal];
+    [selectionBtn setTitleColor:self.titleColorNormal forState:UIControlStateHighlighted];
+    [selectionBtn setTitleColor:self.titleColorSelection forState:UIControlStateSelected];
     _selectionBtn = selectionBtn ;
     _selectionBtn.selected = YES ;
 }
@@ -315,6 +385,17 @@
     _moveIndicatorProgress = moveIndicatorProgress ;
     
     [self moveIndicatorWithProgress:moveIndicatorProgress];
+}
+-(void)setPercentPageSlidCycle:(CGFloat)percentPageSlidCycle
+{
+    _percentPageSlidCycle = percentPageSlidCycle ;
+    
+    if (_percentPageSlidCycle < 0.5 ) {
+        _percentPageSlidCycle = 0.5 ;
+    }
+    else if (_percentPageSlidCycle > 1.0){
+        _percentPageSlidCycle = 1.0 ;
+    }
 }
 -(void)setTitleColorNormal:(UIColor *)titleColorNormal
 {

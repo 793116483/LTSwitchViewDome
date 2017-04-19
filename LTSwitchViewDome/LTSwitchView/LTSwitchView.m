@@ -291,9 +291,6 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate ,LTSwi
         return ;
     }
     
-    // 正在滑动的位置告诉代理
-    [self viewOrVcPageChanging];
-    
     if (self.isWillAppear && self.startLoaction != self.slideLoaction) {
         self.isWillAppear = NO ;
         
@@ -309,6 +306,9 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate ,LTSwi
             [self viewOrVcWillAppear:_willShowSubViewOrVc];
         }
     }
+    
+    // 正在滑动的位置告诉代理
+    [self viewOrVcPageChanging];
     
     [self dragging:scrollView];
 }

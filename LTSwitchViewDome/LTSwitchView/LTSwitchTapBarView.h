@@ -48,12 +48,24 @@ typedef enum : NSUInteger {
     【1.2】当前选中的位置 (0...n-1) ，默认 = 0
 */
 @property (nonatomic , assign)NSInteger selectionIndex ;
+
+
 /**
     【1.3】move indicator to progress 范围(0.0 ~ 1.0)，设置该属性表示 指示器 移动到的 位置占总
           cotnetOfSize.width比例，需要时 用户自已设置。
           例如：n = 2，indicator 滑动到两个 title 中间，用户只需设置 0.5 就能达到效果。
  */
 @property (nonatomic , assign)CGFloat   moveIndicatorProgress ;
+/**
+    【1.3.1】selection title 颜色变化 是否需要过渡, 默认 YES 。 <提示: 必须与 moveIndicatorProgress 配套使用>
+ */
+@property (nonatomic , getter=isTransitionTitleColor)BOOL   transitionTitleColor ;
+/**
+    【1.3.2】每页切换周期比例：滑动到了每个页面的 titleItemWidth * percentPageSlidCycle 的位置 就会变更 selectionIndex 记录的下标。（0.5 <= percentPageSlidCycle <= 1.0）, 默认为 1.0。 <提示: 必须与 moveIndicatorProgress 配套使用>
+ */
+@property (nonatomic , assign)CGFloat   percentPageSlidCycle ;
+
+
 /**
     【1.4】通常不被选中状态下 title 颜色值 ，默认颜色 = UIColorFromRGB(0x666666)
  */
@@ -75,6 +87,7 @@ typedef enum : NSUInteger {
         reservedAlwaysShowItemWidthMultiple >= 0 永恒
  */
 @property (nonatomic , assign) CGFloat  reservedAlwaysShowItemWidthMultiple ;
+
 
 
 /**
