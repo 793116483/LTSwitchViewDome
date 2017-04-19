@@ -233,22 +233,17 @@
     CGFloat reservedAlwaysShowItemWidth = self.titleItemWidth * (self.reservedAlwaysShowItemWidthMultiple + 0.5 ) ;
     
     if (direction == 2) {
-        if (currentShowWidth < indicatorMoveTo + reservedAlwaysShowItemWidth) {
-            contentOffsetX += (indicatorMoveTo + reservedAlwaysShowItemWidth) - currentShowWidth;
-        }
-        
-        if (contentOffsetX + self.scrollView.frame.size.width > self.contentSize.width) {
-            contentOffsetX = self.contentSize.width - self.scrollView.frame.size.width ;
-        }
+        contentOffsetX += (indicatorMoveTo + reservedAlwaysShowItemWidth) - currentShowWidth;
     }
     else{
-        if (contentOffsetX > indicatorMoveTo - reservedAlwaysShowItemWidth) {
-            contentOffsetX = indicatorMoveTo - reservedAlwaysShowItemWidth ;
-        }
-        
-        if (contentOffsetX < 0) {
-            contentOffsetX = 0 ;
-        }
+        contentOffsetX = indicatorMoveTo - reservedAlwaysShowItemWidth ;
+    }
+    
+    if (contentOffsetX < 0) {
+        contentOffsetX = 0 ;
+    }
+    else if (contentOffsetX + self.scrollView.frame.size.width > self.contentSize.width) {
+        contentOffsetX = self.contentSize.width - self.scrollView.frame.size.width ;
     }
     
     if (self.scrollView.contentOffset.x != contentOffsetX) {
