@@ -61,7 +61,7 @@ typedef enum : NSUInteger {
  */
 @property (nonatomic , getter=isTransitionTitleColor)BOOL   transitionTitleColor ;
 /**
-    【1.3.2】每页切换周期比例：滑动到了每个页面的 titleItemWidth * percentPageSlidCycle 的位置 就会变更 selectionIndex 记录的下标。（0.5 <= percentPageSlidCycle <= 1.0）, 默认为 1.0。 <提示: 必须与 moveIndicatorProgress 配套使用>
+    【1.3.2】每页切换周期比例：指示器滑动到了每个页面的 titleItemWidth * percentPageSlidCycle 的位置 就会变更 selectionIndex 记录的下标。（0.5 <= percentPageSlidCycle <= 1.0）, 默认为 1.0。 <提示: 必须与 moveIndicatorProgress 配套使用>
  */
 @property (nonatomic , assign)CGFloat   percentPageSlidCycle ;
 
