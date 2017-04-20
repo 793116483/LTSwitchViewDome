@@ -445,6 +445,7 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate>
     [self.childViewsOrViewControllers removeAllObjects];
     [self.subScrollViews removeAllObjects];
     self.observerScrollView = nil ;
+    self.currentMoveYDict = nil ;
     
     self.maxSlideLocation = -1 ;
     [self needRefreshDataOfCollectionView];
@@ -462,6 +463,8 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate>
         }
         
         [self.needFirstLoadDataViewIndex removeObject:@([self.childViewsOrViewControllers indexOfObject:viewOrVc])];
+        NSInteger vcIndex = [self.childViewsOrViewControllers indexOfObject:viewOrVc];
+        [self.currentMoveYDict removeObjectForKey:[NSString stringWithFormat:@"%ld",vcIndex]];
         [self.childViewsOrViewControllers removeObject:viewOrVc];
         UIView * scrollView = [self getScrollViewWithViewOrVc:viewOrVc];
         [self.subScrollViews removeObject:scrollView];
@@ -709,6 +712,7 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate>
     [self.childViewsOrViewControllers removeAllObjects];
     [self.subScrollViews removeAllObjects];
     self.observerScrollView = nil ;
+    self.currentMoveYDict = nil ;
     
     self.maxSlideLocation = -1 ;
     [self viewOrVcDidDisAppear];
