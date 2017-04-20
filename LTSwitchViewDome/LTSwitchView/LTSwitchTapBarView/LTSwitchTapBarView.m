@@ -67,6 +67,13 @@
 {
     [super layoutSubviews];
     
+    if (!self.isSetedTitleItemWidth && self.titleArray.count) {
+        _titleItemWidth = self.frame.size.width / self.titleArray.count ;
+        if (!self.isSetedSelectionIndicatorWidht) {
+            _selectionIndicatorWidht = _titleItemWidth ;
+        }
+    }
+    
     self.topLine.frame = CGRectMake(0, 0, self.bounds.size.width, self.topLineHeight);
     
     self.scrollView.frame = CGRectMake(0, self.topLineHeight, self.bounds.size.width, self.bounds.size.height - self.topLineHeight - self.bottomLineHeight);
@@ -75,7 +82,7 @@
     self.bottomLine.frame = CGRectMake(0, self.frame.size.height - self.bottomLineHeight, self.bounds.size.width, self.bottomLineHeight);
     
     self.contentView.frame = CGRectMake(0, 0, self.contentSize.width, self.scrollView.frame.size.height - self.selectionIndicatorHeight);
-
+    
     
     self.indicatorView.frame = CGRectMake(0, self.contentView.frame.size.height, self.selectionIndicatorWidht, self.selectionIndicatorHeight);
     CGFloat centerX = self.titleItemWidth * self.selectionIndex + self.titleItemWidth / 2;
@@ -136,13 +143,13 @@
     NSInteger pageIndex = (NSInteger)(moveIndicatorLocation / tmpPageSlidCycle) ;
     
     
-//    NSLog(@"transition pageIndex = %ld , selectionIndex = %ld",pageIndex,self.selectionIndex);
+    //    NSLog(@"transition pageIndex = %ld , selectionIndex = %ld",pageIndex,self.selectionIndex);
     if (pageIndex == self.selectionIndex && offset) {
         CGFloat colorChangeScale = offset / tmpPageSlidCycle ;
         
         UIColor * nextBtnColor = [self transitionTitleColorWithColorChangeScale:colorChangeScale];
         UIColor * currentBtnColor = [self transitionTitleColorWithColorChangeScale:1- colorChangeScale];
-
+        
         [self.selectionBtn setTitleColor:currentBtnColor forState:UIControlStateSelected];
         UIButton * btn = nil ;
         if (direction == 1 && self.contentView.subviews.count > pageIndex + 1) {
@@ -156,8 +163,8 @@
             [btn setTitleColor:nextBtnColor forState:UIControlStateNormal];
         }
         
-//        NSLog(@"transition Color index = %ld %ld , d = %ld , scale = %f",pageIndex,self.selectionIndex,direction,colorChangeScale);
-
+        //        NSLog(@"transition Color index = %ld %ld , d = %ld , scale = %f",pageIndex,self.selectionIndex,direction,colorChangeScale);
+        
     }
 }
 
@@ -227,7 +234,7 @@
     CGFloat currentShowWidth = self.scrollView.contentOffset.x + self.scrollView.frame.size.width  ;
     CGFloat indicatorMoveTo = self.titleItemWidth * index + self.titleItemWidth / 2;
     CGFloat contentOffsetX = self.scrollView.contentOffset.x ;
-
+    
     // 1左<-；2右->
     NSInteger direction = index < self.selectionIndex ? 1 : 2 ;
     CGFloat reservedAlwaysShowItemWidth = self.titleItemWidth * (self.reservedAlwaysShowItemWidthMultiple + 0.5 ) ;
@@ -327,14 +334,6 @@
         }
     }
     
-    if (!self.isSetedTitleItemWidth && titleArray.count) {
-        _titleItemWidth = self.frame.size.width / titleArray.count ;
-        
-        if (!self.isSetedSelectionIndicatorWidht) {
-            _selectionIndicatorWidht = _titleItemWidth ;
-        }
-    }
-    
     [self setNeedsLayout];
     
 }
@@ -350,7 +349,7 @@
     if (selectionIndex < self.contentView.subviews.count) {
         [self scrollingToIndex:selectionIndex];
         self.selectionBtn = self.contentView.subviews[selectionIndex] ;
-      
+        
         self.needMoveIndicator = YES ;
     }
     _selectionIndex = selectionIndex ;
