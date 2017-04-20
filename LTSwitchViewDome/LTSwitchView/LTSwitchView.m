@@ -11,7 +11,7 @@
 
 
 @interface LTSwitchView ()<UICollectionViewDelegate,UICollectionViewDataSource,
-UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate ,LTSwitchViewCollectionCellDelegate>
+UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate>
 
 
 //【1】 与代理有关
@@ -72,6 +72,12 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate ,LTSwi
 @property (nonatomic , strong)NSMutableDictionary * currentMoveYDict ;
 
 
+// 被监听的对象（监听的是contentOffset属性）
+@property (nonatomic , weak) UIScrollView * observerScrollView ;
+// 如果某个页面不是 scrollView ，那么就用 UIView 占位
+@property (nonatomic , strong) NSMutableArray * subScrollViews ;
+
+
 @end
 
 #define ZYWeakSelf __weak typeof(self) weakSelf = self
@@ -127,6 +133,7 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate ,LTSwi
 -(void)dealloc
 {
     [_headerView removeObserver:self forKeyPath:@"frame"];
+    [self.observerScrollView removeObserver:self forKeyPath:@"contentOffset"];
 }
 
 #pragma mark - UITableViewDataSource & UITableViewDelegate
@@ -150,8 +157,8 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate ,LTSwi
 
 
 
-#pragma mark - LTSwitchViewCollectionCellDelegate
--(void)switchViewCollectionCell:(LTSwitchViewCollectionCell *)cell subScrollViewDidScroll:(UIScrollView *)scrollView
+#pragma mark - 子 scrollView 移动 conentOffset 变化
+-(void)moveSubScrollViewDidScroll:(UIScrollView *)scrollView
 {
 //    NSLog(@"=== subScrollViewDidScroll = %f  ,  %f",scrollView.contentOffset.y,self.contentView.contentOffset.y);
     
@@ -207,7 +214,6 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate ,LTSwi
     
     id viewOrVc = self.childViewsOrViewControllers[indexPath.row];
     cell.viewOrVc = viewOrVc ;
-    cell.delegate = self ;
     
     if (![self.needFirstLoadDataViewIndex containsObject:@(indexPath.row)]) {
         [self.needFirstLoadDataViewIndex addObject:@(indexPath.row)];
@@ -384,6 +390,10 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate ,LTSwi
 }
 -(void)viewOrVcPageChanged
 {
+    if (self.currentPageIndex < self.subScrollViews.count) {
+        self.observerScrollView = self.subScrollViews[self.currentPageIndex];
+    }
+    
     if (self.canCallPageIndexChanged && self.currentPageIndex < self.childViewsOrViewControllers.count) {
         [self.delegate switchView:self pageIndexChanged:self.currentPageIndex];
     }
@@ -433,6 +443,8 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate ,LTSwi
     
     [self.needFirstLoadDataViewIndex removeAllObjects];
     [self.childViewsOrViewControllers removeAllObjects];
+    [self.subScrollViews removeAllObjects];
+    self.observerScrollView = nil ;
     
     self.maxSlideLocation = -1 ;
     [self needRefreshDataOfCollectionView];
@@ -446,10 +458,14 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate ,LTSwi
         
         if (self.currentSubViewOrVc == viewOrVc) {
             [self viewOrVcWillDisAppear:self.currentSubViewOrVc];
+            self.observerScrollView = nil ;
         }
         
         [self.needFirstLoadDataViewIndex removeObject:@([self.childViewsOrViewControllers indexOfObject:viewOrVc])];
         [self.childViewsOrViewControllers removeObject:viewOrVc];
+        UIView * scrollView = [self getScrollViewWithViewOrVc:viewOrVc];
+        [self.subScrollViews removeObject:scrollView];
+        
         self.maxSlideLocation = -1 ;
         [self needRefreshDataOfCollectionView];
         
@@ -558,6 +574,10 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate ,LTSwi
             [self.topViewController addChildViewController:viewOrVc];
         }
         [self.childViewsOrViewControllers addObject:viewOrVc];
+        UIView * scrollView = [self getScrollViewWithViewOrVc:viewOrVc];
+        if (scrollView) {
+            [self.subScrollViews addObject:scrollView];
+        }
     }
     
     if (needRefreshData && self.childViewsOrViewControllers.count != preCount) {
@@ -602,6 +622,48 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate ,LTSwi
     [self refreshAllDataOfCollectionView];
 }
 
+-(UIView *)getScrollViewWithViewOrVc:(id)viewOrVc
+{
+    UIView * scrollView = nil ;
+    
+    if ([viewOrVc isKindOfClass:[UIViewController class]]) {
+        
+        if ([viewOrVc isKindOfClass:[UITableViewController class]]) {
+            scrollView = ((UITableViewController *)viewOrVc).tableView ;
+        }
+        else if ([viewOrVc isKindOfClass:[UICollectionViewController class]]){
+            scrollView = ((UICollectionViewController *)viewOrVc).collectionView ;
+        }
+        else{
+            UIViewController * controller = (UIViewController *)viewOrVc ;
+            for (NSInteger index = controller.view.subviews.count -1; index >= 0 ; index--) {
+                id subView = controller.view.subviews[index];
+                if ([subView isKindOfClass:[UIScrollView class]]) {
+                    scrollView = (UIScrollView *)subView ;
+                    break ;
+                }
+            }
+            
+            if (!scrollView) {
+                scrollView = controller.view;
+            }
+        }
+    }
+    else if([viewOrVc isKindOfClass:[UIView class]]){
+        UIView * view = (UIView *)viewOrVc ;
+        if ([view isKindOfClass:[UIScrollView class]]) {
+            scrollView = (UIScrollView *)view ;
+        }
+        
+        if (!scrollView) {
+            scrollView = view;
+        }
+    }
+  
+    return scrollView ;
+}
+
+
 #pragma mark - KVO 监听 headerView.frame
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
 {
@@ -611,6 +673,9 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate ,LTSwi
             headerFrame.size.height != self.headerView.frame.size.height) {
             [self setNeedsLayout];
         }
+    }
+    else if ([keyPath isEqualToString:@"contentOffset"]){
+        [self moveSubScrollViewDidScroll:self.observerScrollView];
     }
 }
 
@@ -629,9 +694,8 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate ,LTSwi
     [self viewOrVcWillAppear:currentSubViewOrVc];
     
     _currentSubViewOrVc = currentSubViewOrVc ;
-    NSInteger currentIndex = self.currentPageIndex ;
-    if (currentIndex >= self.childViewsOrViewControllers.count) {
-        currentIndex = self.childViewsOrViewControllers.count - 1 ;
+    if (self.currentPageIndex < self.subScrollViews.count) {
+        self.observerScrollView = self.subScrollViews[self.currentPageIndex];
     }
     
     self.isNeedNoticePageChanged = NO ;
@@ -643,6 +707,8 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate ,LTSwi
     
     [self.needFirstLoadDataViewIndex removeAllObjects];
     [self.childViewsOrViewControllers removeAllObjects];
+    [self.subScrollViews removeAllObjects];
+    self.observerScrollView = nil ;
     
     self.maxSlideLocation = -1 ;
     [self viewOrVcDidDisAppear];
@@ -863,4 +929,24 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate ,LTSwi
     return _currentMoveYDict ;
 }
 
+-(void)setObserverScrollView:(UIScrollView *)observerScrollView
+{
+    if ([_observerScrollView isKindOfClass:[UIScrollView class]]) {
+        [_observerScrollView removeObserver:self forKeyPath:@"contentOffset"];
+        _observerScrollView = nil ;
+    }
+    
+    _observerScrollView = observerScrollView ;
+    
+    if ([_observerScrollView isKindOfClass:[UIScrollView class]]) {
+        [_observerScrollView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
+    }
+}
+-(NSMutableArray *)subScrollViews
+{
+    if (!_subScrollViews) {
+        _subScrollViews = [NSMutableArray array];
+    }
+    return _subScrollViews ;
+}
 @end
