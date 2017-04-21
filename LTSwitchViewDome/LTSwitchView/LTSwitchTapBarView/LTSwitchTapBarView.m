@@ -22,6 +22,8 @@
 
 @property (nonatomic , weak) UIButton * selectionBtn ;
 
+@property (nonatomic , assign) CGFloat startProgress ;
+
 @property (nonatomic , getter=isNeedMoveIndicator) BOOL needMoveIndicator ;
 
 @property (nonatomic , getter=isSetedTitleItemWidth) BOOL setedTitleItemWidth ;
@@ -43,14 +45,15 @@
         [self.scrollView addSubview:self.contentView];
         [self.scrollView addSubview:self.indicatorView];
         
-        self.transitionTitleColor = YES ;
+        self.transitionTitleColorEnabled = YES ;
+        self.indicatorStretchEnabled = YES ;
         _percentPageSlidCycle = 1.0 ;
         _titleColorNormal = UIColorFromRGB(0x666666) ;
         _titleColorSelection = UIColorFromRGB(0x333333) ;
         _titleFontSize = 16.0 ;
         self.reservedAlwaysShowItemWidthMultiple = 2.0 ;
         self.userDraggable = YES ;
-        _selectionIndicatorHeight = 2.0 ;
+        _selectionIndicatorHeight = 2.5 ;
         self.selectionIndicatorColor = UIColorFromRGB(0x333333) ;
         self.shouldAnimateUserSelection = YES ;
         self.topLineColor = UIColorFromRGB(0xdddddd) ;
@@ -132,9 +135,10 @@
     return resultColor ;
 }
 
--(void)transitionTitleColorProgress
+-(void)transitionTitleColorProgress:(CGFloat)progress
 {
-    CGFloat offset = self.indicatorView.center.x - self.selectionBtn.center.x ;
+    CGFloat maxOffsetLocation = self.scrollView.contentSize.width - self.titleItemWidth ;
+    CGFloat offset = maxOffsetLocation * ( progress - self.startProgress ) ;
     // 向左滑动为 1 ，向右滑动为 2
     NSInteger direction = offset > 0 ? 1 : 2 ;
     offset = offset >= 0 ? offset : -offset ;
@@ -143,8 +147,8 @@
     NSInteger pageIndex = (NSInteger)(moveIndicatorLocation / tmpPageSlidCycle) ;
     
     
-    //    NSLog(@"transition pageIndex = %ld , selectionIndex = %ld",pageIndex,self.selectionIndex);
     if (pageIndex == self.selectionIndex && offset) {
+        
         CGFloat colorChangeScale = offset / tmpPageSlidCycle ;
         
         UIColor * nextBtnColor = [self transitionTitleColorWithColorChangeScale:colorChangeScale];
@@ -162,27 +166,81 @@
         if (btn) {
             [btn setTitleColor:nextBtnColor forState:UIControlStateNormal];
         }
-        
-        //        NSLog(@"transition Color index = %ld %ld , d = %ld , scale = %f",pageIndex,self.selectionIndex,direction,colorChangeScale);
-        
     }
+}
+
+-(void)changeIndicatorWidthWithProgress:(CGFloat)progress
+{
+    CGFloat offsetWidth = ( self.titleItemWidth - self.selectionIndicatorWidht ) / 2.0 ;
+    CGFloat maxOffsetLocation = self.scrollView.contentSize.width - self.titleItemWidth ;
+    
+    CGFloat unit = 1.0 / (self.titleArray.count - 1) ;
+    CGFloat offsetProgress =  progress - self.startProgress ;
+    // 向左滑动为 1 ，向右滑动为 2
+    NSInteger direction = offsetProgress > 0 ? 1 : 2 ;
+    offsetProgress = offsetProgress >= 0 ? offsetProgress : -offsetProgress ;
+    CGFloat percent = offsetProgress / unit  ,  tmpPercent;
+    // 总共需要增加的宽度
+    CGFloat sumAddWidth = self.titleItemWidth - self.selectionIndicatorWidht ;
+    CGFloat indicatorX , indicatorWidth ;
+    
+    if (direction == 1) {
+        
+        CGFloat startIndicatorX = maxOffsetLocation * self.startProgress + offsetWidth ;
+        
+        if (percent <= 0.5) {
+            tmpPercent = percent / 0.5 ;
+            indicatorWidth = self.selectionIndicatorWidht + sumAddWidth * tmpPercent ;
+            indicatorX = startIndicatorX + self.selectionIndicatorWidht * 0.5 * tmpPercent ;
+        }
+        else{
+            tmpPercent = ( percent - 0.5 ) / 0.5 ;
+            indicatorWidth = self.titleItemWidth - sumAddWidth * tmpPercent ;
+            indicatorX = startIndicatorX + self.selectionIndicatorWidht * 0.5 + ( self.titleItemWidth - self.selectionIndicatorWidht * 0.5 ) * tmpPercent ;
+        }
+    }
+    else{
+        
+        CGFloat startIndicatorMaxX = maxOffsetLocation * self.startProgress + offsetWidth + self.selectionIndicatorWidht ;
+        
+        if (percent <= 0.5) {
+            tmpPercent = percent / 0.5 ;
+            indicatorWidth = self.selectionIndicatorWidht + sumAddWidth * tmpPercent ;
+            indicatorX = startIndicatorMaxX - self.selectionIndicatorWidht * 0.5 * tmpPercent ;
+        }
+        else{
+            tmpPercent = ( percent - 0.5 ) / 0.5 ;
+            indicatorWidth = self.titleItemWidth - sumAddWidth * tmpPercent ;
+            indicatorX = startIndicatorMaxX - self.selectionIndicatorWidht * 0.5 - ( self.titleItemWidth - self.selectionIndicatorWidht * 0.5 ) * tmpPercent ;
+        }
+        
+        indicatorX = indicatorX - indicatorWidth ;
+    }
+    
+    self.indicatorView.frame = CGRectMake(indicatorX , self.indicatorView.frame.origin.y, indicatorWidth, self.indicatorView.frame.size.height);
 }
 
 -(void)moveIndicatorWithProgress:(CGFloat)moveIndicatorProgress
 {
-    if (!self.shouldAnimateUserSelection) {
+    if (!self.shouldAnimateUserSelection || self.titleArray.count <= 1) {
         return ;
     }
-    CGFloat minMoveToLocation = self.titleItemWidth / 2.0 ;
-    CGFloat maxOffsetLocation = self.scrollView.contentSize.width - self.titleItemWidth ;
-    CGFloat indicatorMoveTo = maxOffsetLocation * moveIndicatorProgress + minMoveToLocation;
-    
-    self.indicatorView.center = CGPointMake(indicatorMoveTo, self.indicatorView.center.y);
     
     self.needMoveIndicator = NO ;
     
-    if (self.isTransitionTitleColor) {
-        [self transitionTitleColorProgress];
+    if (self.isTransitionTitleColorEnabled) {
+        [self transitionTitleColorProgress:moveIndicatorProgress];
+    }
+    
+    if (self.titleItemWidth > self.selectionIndicatorWidht && self.isIndicatorStretchEnabled) {
+        [self changeIndicatorWidthWithProgress:moveIndicatorProgress];
+    }
+    else{
+        CGFloat minMoveToLocation = self.titleItemWidth / 2.0 ;
+        CGFloat maxOffsetLocation = self.scrollView.contentSize.width - self.titleItemWidth ;
+        CGFloat indicatorMoveTo = maxOffsetLocation * moveIndicatorProgress + minMoveToLocation;
+        
+        self.indicatorView.center = CGPointMake(indicatorMoveTo, self.indicatorView.center.y);
     }
 }
 
@@ -228,7 +286,7 @@
     }
     
     if (_titleArray.count <= index) {
-        index = _titleArray.count ;
+        index = _titleArray.count - 1 ;
     }
     
     CGFloat currentShowWidth = self.scrollView.contentOffset.x + self.scrollView.frame.size.width  ;
@@ -353,6 +411,13 @@
         self.needMoveIndicator = YES ;
     }
     _selectionIndex = selectionIndex ;
+    
+    if (self.titleArray.count > 1) {
+        self.startProgress = 1.0/(self.titleArray.count - 1) * selectionIndex ;
+    }
+    else{
+        self.startProgress = 0 ;
+    }
 }
 -(void)setSelectionBtn:(UIButton *)selectionBtn
 {

@@ -142,9 +142,10 @@
     if (!_switchTapBarView) {
         _switchTapBarView = [[LTSwitchTapBarView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 40)];
         _switchTapBarView.center = CGPointMake(self.view.center.x, 80);
-        _switchTapBarView.titleArray = @[@"页面1",@"页面2",@"页面3",@"页面4",@"页面5",@"页面6",@"页面7",@"页面8",@"页面9",@"页面10",@"页面11"];
+        _switchTapBarView.titleArray = @[@"页面0",@"页面",@"页面",@"页面",@"页面5",@"页面6",@"页面7",@"页面8",@"页面9",@"页面10",@"页面11"];
         _switchTapBarView.titleItemWidth = 60 ;
-        _switchTapBarView.selectionIndicatorWidht = 40 ;
+        _switchTapBarView.selectionIndicatorWidht = 20 ;
+//        _switchTapBarView.selectionIndicatorHeight = 3 ;
         _switchTapBarView.delegate = self ;
 //        _switchView.percentPageSlidCycle = 0.5 ;
         _switchTapBarView.selectionIndicatorColor = [UIColor redColor];
