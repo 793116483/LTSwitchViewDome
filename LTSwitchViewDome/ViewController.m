@@ -150,6 +150,7 @@
 //        _switchView.percentPageSlidCycle = 0.5 ;
         _switchTapBarView.selectionIndicatorColor = [UIColor redColor];
         _switchTapBarView.titleColorSelection = [UIColor redColor];
+        _switchTapBarView.needBoldToTitleWhenSelection = YES ;
 //        _switchTapBarView.shouldAnimateUserSelection = NO ;
 //        _switchTapBarView.reservedAlwaysShowItemWidthMultiple = 1 ;
 //        _switchTapBarView.userDraggable = NO ;

@@ -71,23 +71,27 @@ typedef enum : NSUInteger {
 
 
 /**
- 【1.4】通常不被选中状态下 title 颜色值 ，默认颜色 = UIColorFromRGB(0x666666)
+ 【1.4】title字体 是否需要 加粗，默认 NO
+ */
+@property (nonatomic , getter=isNeedBoldToTitleWhenSelection)BOOL needBoldToTitleWhenSelection ;
+/**
+ 【1.5】通常不被选中状态下 title 颜色值 ，默认颜色 = UIColorFromRGB(0x666666)
  */
 @property (nonatomic , strong)UIColor * titleColorNormal ;
 /**
- 【1.5】选中状态下 title 颜色值 ，默认颜色 = UIColorFromRGB(0x333333)
+ 【1.6】选中状态下 title 颜色值 ，默认颜色 = UIColorFromRGB(0x333333)
  */
 @property (nonatomic , strong)UIColor * titleColorSelection ;
 /**
- 【1.6】每个 title 宽度大小，默认 = (self.bounds.size.widht / titleArray.count )
+ 【1.7】每个 title 宽度大小，默认 = (self.bounds.size.widht / titleArray.count )
  */
 @property (nonatomic , assign) CGFloat  titleItemWidth ;
 /**
- 【1.7】每个 title 字体大小，默认 = 16.0
+ 【1.8】每个 title 字体大小，默认 = 16.0
  */
 @property (nonatomic , assign) CGFloat  titleFontSize ;
 /**
- 【1.8】值表示 指示器移动到的位置 左边或右边总是会预留 titleItemWidth * reservedAlwaysShowItemWidthMultiple 的大小暴露在可视区域中，默认 = 2.0 ;
+ 【1.9】值表示 指示器移动到的位置 左边或右边总是会预留 titleItemWidth * reservedAlwaysShowItemWidthMultiple 的大小暴露在可视区域中，默认 = 2.0 ;
  reservedAlwaysShowItemWidthMultiple >= 0 永恒
  */
 @property (nonatomic , assign) CGFloat  reservedAlwaysShowItemWidthMultiple ;

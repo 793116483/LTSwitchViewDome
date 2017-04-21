@@ -47,6 +47,7 @@
         
         self.transitionTitleColorEnabled = YES ;
         self.indicatorStretchEnabled = YES ;
+        self.needBoldToTitleWhenSelection = NO ;
         _percentPageSlidCycle = 1.0 ;
         _titleColorNormal = UIColorFromRGB(0x666666) ;
         _titleColorSelection = UIColorFromRGB(0x333333) ;
@@ -112,6 +113,8 @@
         [btn setTitleColor:self.titleColorNormal forState:UIControlStateHighlighted];
         [btn setTitleColor:self.titleColorSelection forState:UIControlStateSelected];
     }
+    
+    self.selectionIndex = self.selectionIndex ;
 }
 
 -(UIColor *)transitionTitleColorWithColorChangeScale:(CGFloat)colorChangeScale
@@ -393,19 +396,17 @@
     }
     
     [self setNeedsLayout];
-    
 }
 -(void)setSelectionIndex:(NSInteger)selectionIndex
 {
-    if (selectionIndex == _selectionIndex) {
-        return ;
-    }
     if (selectionIndex < 0) {
         selectionIndex = 0 ;
     }
     
     if (selectionIndex < self.contentView.subviews.count) {
-        [self scrollingToIndex:selectionIndex];
+        if (selectionIndex != _selectionIndex) {
+            [self scrollingToIndex:selectionIndex];
+        }
         self.selectionBtn = self.contentView.subviews[selectionIndex] ;
         
         self.needMoveIndicator = YES ;
@@ -424,12 +425,19 @@
     [_selectionBtn setTitleColor:self.titleColorNormal forState:UIControlStateNormal];
     [_selectionBtn setTitleColor:self.titleColorNormal forState:UIControlStateHighlighted];
     [_selectionBtn setTitleColor:self.titleColorSelection forState:UIControlStateSelected];
+    if (self.isNeedBoldToTitleWhenSelection) { // 还原字体
+        _selectionBtn.titleLabel.font = [UIFont systemFontOfSize:self.titleFontSize];
+    }
     _selectionBtn.selected = NO ;
+    
     
     [selectionBtn setTitleColor:self.titleColorNormal forState:UIControlStateNormal];
     [selectionBtn setTitleColor:self.titleColorNormal forState:UIControlStateHighlighted];
     [selectionBtn setTitleColor:self.titleColorSelection forState:UIControlStateSelected];
     _selectionBtn = selectionBtn ;
+    if (self.isNeedBoldToTitleWhenSelection) { // 加粗字体
+        _selectionBtn.titleLabel.font = [UIFont boldSystemFontOfSize:self.titleFontSize];
+    }
     _selectionBtn.selected = YES ;
 }
 -(void)setMoveIndicatorProgress:(CGFloat)moveIndicatorProgress
@@ -484,6 +492,8 @@
     _titleFontSize = titleFontSize ;
     
     [self setupTitleButtonsSomeProperty];
+    
+    self.selectionIndex = self.selectionIndex ;
 }
 -(void)setReservedAlwaysShowItemWidthMultiple:(CGFloat)reservedAlwaysShowItemWidthMultiple
 {
@@ -541,6 +551,13 @@
 {
     _bottomLineHeight = bottomLineHeight ;
     [self setNeedsLayout];
+}
+
+-(void)setNeedBoldToTitleWhenSelection:(BOOL)needBoldToTitleWhenSelection
+{
+    _needBoldToTitleWhenSelection = needBoldToTitleWhenSelection ;
+    
+    self.selectionIndex = self.selectionIndex ;
 }
 
 @end
