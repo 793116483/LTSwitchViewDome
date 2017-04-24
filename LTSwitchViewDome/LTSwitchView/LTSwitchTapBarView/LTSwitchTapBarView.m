@@ -57,6 +57,7 @@
         _selectionIndicatorHeight = 2.5 ;
         self.selectionIndicatorColor = UIColorFromRGB(0x333333) ;
         self.shouldAnimateUserSelection = YES ;
+        self.animationDuration = 0.25 ;
         self.topLineColor = UIColorFromRGB(0xdddddd) ;
         _topLineHeight = 0.5 ;
         self.bottomLineColor = UIColorFromRGB(0xdddddd) ;
@@ -270,7 +271,7 @@
     CGFloat indicatorMoveTo = btn.center.x ;
     
     if (self.isShouldAnimateUserSelection) {
-        [UIView animateWithDuration:0.25 animations:^{
+        [UIView animateWithDuration:self.animationDuration animations:^{
             self.indicatorView.center = CGPointMake(indicatorMoveTo, self.indicatorView.center.y);
         }];
     }
@@ -315,7 +316,7 @@
     }
     
     if (self.scrollView.contentOffset.x != contentOffsetX) {
-        [UIView animateWithDuration:0.25 animations:^{
+        [UIView animateWithDuration:self.animationDuration animations:^{
             self.scrollView.contentOffset = CGPointMake(contentOffsetX, 0);
         }];
         if (self.isNeedMoveIndicator) {

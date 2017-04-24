@@ -71,7 +71,7 @@ typedef enum : NSUInteger {
 
 
 /**
- 【1.4】title字体 是否需要 加粗，默认 NO
+ 【1.4】title字体 是否需要 加粗(当选中的时候)，默认 NO
  */
 @property (nonatomic , getter=isNeedBoldToTitleWhenSelection)BOOL needBoldToTitleWhenSelection ;
 /**
@@ -132,6 +132,10 @@ typedef enum : NSUInteger {
  【3.4】当用户点击了某一块区域 指示器 move 时是否需要做动画，默认 = YES
  */
 @property (nonatomic , getter=isShouldAnimateUserSelection) BOOL shouldAnimateUserSelection ;
+/**
+ 【3.5】指示器 move 时动画的时间，默认 = 0.25
+ */
+@property (nonatomic , assign)NSTimeInterval  animationDuration ;
 
 
 
