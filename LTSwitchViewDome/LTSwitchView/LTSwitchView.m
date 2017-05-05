@@ -944,6 +944,7 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate>
     
     if ([_observerScrollView isKindOfClass:[UIScrollView class]]) {
         [_observerScrollView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
+        self.preMoveY = _observerScrollView.contentOffset.y ;
     }
 }
 -(NSMutableArray *)subScrollViews
