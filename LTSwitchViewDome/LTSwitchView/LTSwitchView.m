@@ -119,6 +119,8 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate>
 {
     [super layoutSubviews];
     
+    [self topViewController];
+    
     self.contentView.frame = self.bounds ;
     
     self.headerView.frame = self.headerView.bounds ;
@@ -526,32 +528,14 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate>
     [self.collectionView setCollectionViewLayout:layout animated:YES];
 }
 
-+ (UIViewController *)currentViewController {
-    UIViewController *result = nil;
-    
-    UIWindow * window = [[UIApplication sharedApplication] keyWindow];
-    if (window.windowLevel != UIWindowLevelNormal)
-    {
-        NSArray *windows = [[UIApplication sharedApplication] windows];
-        for(UIWindow * tmpWin in windows)
-        {
-            if (tmpWin.windowLevel == UIWindowLevelNormal)
-            {
-                window = tmpWin;
-                break;
-            }
+-(UIViewController *)currentViewController {
+    for (UIView *next = [self superview]; next; next = next.superview) {
+        UIResponder *nextResponser = [next nextResponder];
+        if ([nextResponser isKindOfClass:[UIViewController class]]) {
+            return (UIViewController *)nextResponser;
         }
     }
-    
-    UIView *frontView = [[window subviews] objectAtIndex:0];
-    id nextResponder = [frontView nextResponder];
-    
-    if ([nextResponder isKindOfClass:[UIViewController class]])
-        result = nextResponder;
-    else
-        result = window.rootViewController;
-    
-    return result;
+    return nil;
 }
 
 -(BOOL)needAddObjectWithViewOrVc:(id)viewOrVc
@@ -873,7 +857,15 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate>
 -(UIViewController *)topViewController
 {
     if (!_topViewController) {
-        _topViewController = [LTSwitchView currentViewController];
+        _topViewController = [self currentViewController];
+        
+        if (_topViewController != nil) {
+            for (id viewOrVc in self.childViewsOrViewControllers) {
+                if ([viewOrVc isKindOfClass:[UIViewController class]]) {
+                    [_topViewController addChildViewController:viewOrVc];
+                }
+            }
+        }
     }
     return _topViewController ;
 }
