@@ -92,6 +92,7 @@
     self.indicatorView.frame = CGRectMake(0, self.contentView.frame.size.height, self.selectionIndicatorWidht, self.selectionIndicatorHeight);
     CGFloat centerX = self.titleItemWidth * self.selectionIndex + self.titleItemWidth / 2;
     self.indicatorView.center = CGPointMake(centerX, self.indicatorView.center.y);
+    self.indicatorView.layer.cornerRadius = self.selectionIndicatorHeight / 2.0 ;
     
     [self setupTitleButtonsSomeProperty];
     

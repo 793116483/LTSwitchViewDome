@@ -173,11 +173,11 @@
 			isa = PBXGroup;
 			children = (
 				F254A0D91EA77583004701C2 /* LTSwitchTapBarView */,
-				F2CCBF051EA0FEC80062BFC0 /* LTSwitchView.h */,
-				F2CCBF061EA0FEC80062BFC0 /* LTSwitchView.m */,
 				F2CCBF071EA0FEC80062BFC0 /* LTSwitchViewCollectionCell.h */,
 				F2CCBF081EA0FEC80062BFC0 /* LTSwitchViewCollectionCell.m */,
 				F2CCBF091EA0FEC80062BFC0 /* LTSwitchViewCollectionCell.xib */,
+				F2CCBF051EA0FEC80062BFC0 /* LTSwitchView.h */,
+				F2CCBF061EA0FEC80062BFC0 /* LTSwitchView.m */,
 			);
 			path = LTSwitchView;
 			sourceTree = "<group>";

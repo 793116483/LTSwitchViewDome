@@ -20,6 +20,7 @@ typedef enum : NSUInteger { // 方向枚举
 
 
 @protocol LTSwitchViewDelegate <NSObject>
+
 @optional
 // 1.某个 subViewOrVc(view 或 viewController)没有在屏幕上显示过并且将要显示在屏幕上通知代理,每个添加的子对象只调用一次
 // viewController 也可以在 自身文件内的 viewWillAppear: 方法里面加载所需的数据
@@ -30,6 +31,7 @@ typedef enum : NSUInteger { // 方向枚举
 
 // 3.切换页面的 过程变动 floatPageIndex ：页面切换移动过程占 总共可以移动距离 的比例；范围：( 0 ~ 1.0 )
 -(void)switchView:(LTSwitchView *)switchView pageIndexChanging:(CGFloat)floatPageIndex ;
+
 // 4.切换页面 时通知代理
 -(void)switchView:(LTSwitchView *)switchView pageIndexChanged:(NSInteger)currentPageIndex ;
 
@@ -48,6 +50,10 @@ typedef enum : NSUInteger { // 方向枚举
 
 @interface LTSwitchView : UIView
 
+// 代理
+@property (nonatomic , weak) id<LTSwitchViewDelegate> delegate ;
+
+
 // 0.contentView：包含了整个的内容的 View ，可以用于刷新,不要改变一些已设置过的属性
 @property (nonatomic , readonly) UITableView * contentView ;
 
@@ -62,6 +68,7 @@ typedef enum : NSUInteger { // 方向枚举
 
 // 3.headerView 默认为 nil
 @property (nonatomic , strong)UIView * headerView ;
+
 //  3.1 headerViewSlideEnle 表示是否可以上下滑动（即），默认 YES
 @property (nonatomic , assign , getter=isheaderViewSlideEnabled) BOOL headerViewSlideEnabled ;
 /**
@@ -92,6 +99,9 @@ typedef enum : NSUInteger { // 方向枚举
 //【 0.5 <= percentPageSlidCycle <= 1.0 】, 默认为 1.0（即滑到一个页面一半时切换页面，相对于 itemSize.width or height 的比列） 。
 @property (nonatomic , assign) CGFloat percentPageSlidCycle ;
 
+
+
+
 // 4.2 设置、添加 和 删除 对象方法
 //*【 如果 UIViewController 的 view 里面有多个 UIScrollView or UIScrollView 子类对象，那么如果需要上下滑动时整体的跟着 动，那么以最后添加的为准，如果view.subviews里面只有一个这样的对象，可以不用注意 】。
 /**
@@ -100,7 +110,7 @@ typedef enum : NSUInteger { // 方向枚举
  */
 -(instancetype)initWithChildViewsOrVcs:(NSMutableArray *)childViewsOrVcs;
 
-//  获取所有的子 views and 子 viewControllers
+//  获取 所有的子 views and 子 viewControllers
 -(NSArray *)allChildViewsAndViewControllers ;
 
 //  添加 多个view and ViewController
@@ -108,22 +118,20 @@ typedef enum : NSUInteger { // 方向枚举
 
 //  添加 view Or ViewController
 -(void)addViewOrVc:(id)viewOrVc ;
-//  viewOrVc 只有是 view Or ViewController 及 它们子类 的对象才会被添加；needRefreshData是否需要刷新
+
+//  添加 view Or ViewController 及 它们子类 的对象才会被添加；needRefreshData是否需要刷新容器
 -(void)addViewOrVcIfNeed:(id)viewOrVc needRefreshData:(BOOL)needRefreshData ;
 
-//  删除所有的view Or ViewController
+//  删除 所有的view Or ViewController
 -(void)removeAllViewsAndVcs ;
 
 //  删除 view Or ViewController
 -(void)removeViewOrVc:(id)viewOrVc ;
 
 
-// 5.移动到 pageIndex 是否需要动画 （可以直接设置 currentPageIndex 移动默认 animated = YES）
+// 5.移动 到 pageIndex 是否需要动画 （可以直接设置当前对象 currentPageIndex 属性移动， 默认 animated = YES）
 -(void)slideToPageIndex:(NSInteger)pageIndex animated:(BOOL)animated ;
 
-
-// 6.代理
-@property (nonatomic , weak) id<LTSwitchViewDelegate> delegate ;
 
 
 // 刷新内容

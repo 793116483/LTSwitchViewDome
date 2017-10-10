@@ -364,6 +364,8 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate>
     _currentPageIndex = pageIndex;
     _currentSubViewOrVc = self.childViewsOrViewControllers[_currentPageIndex];
     
+    [self viewOrVcDidDisAppear];
+
     [self viewOrVcPageChanged];
 }
 
@@ -504,6 +506,10 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate>
 {
     if (pageIndex < 0) {
         pageIndex = 0 ;
+    }
+    
+    if (self.currentPageIndex == pageIndex) {
+        return ;
     }
     
     [self calculateSlideDirectionWithPageIndex:pageIndex];
@@ -943,6 +949,7 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate>
     
     if ([_observerScrollView isKindOfClass:[UIScrollView class]]) {
         [_observerScrollView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
+        
         self.preMoveY = _observerScrollView.contentOffset.y ;
     }
 }
