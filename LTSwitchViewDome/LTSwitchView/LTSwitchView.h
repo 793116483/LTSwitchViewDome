@@ -4,7 +4,7 @@
 //
 //  Created by 瞿杰 on 2017/4/5.
 //
-//  页面切换view 可以包含的控件为 UIView or UIViewController 
+//  页面切换view 可以包含的控件为 UIView or UIViewController
 
 
 #import <UIKit/UIKit.h>
@@ -38,6 +38,9 @@ typedef enum : NSUInteger { // 方向枚举
 
 // 6.某个 subViewOrVc (view 或 viewController) 已经消失 在可视区域时调用
 -(void)switchView:(LTSwitchView *)switchView didDisAppearSubViewOrVc:(id)subViewOrVc ;
+
+// 7.点击了某个 subViewOrVc
+-(void)switchView:(LTSwitchView *)switchView didSelectItemAtIndex:(NSInteger)index ;
 
 @end
 
@@ -121,6 +124,10 @@ typedef enum : NSUInteger { // 方向枚举
 
 // 6.代理
 @property (nonatomic , weak) id<LTSwitchViewDelegate> delegate ;
+
+
+// 刷新内容
+-(void)needRefreshDataOfCollectionView ;
 
 
 @end

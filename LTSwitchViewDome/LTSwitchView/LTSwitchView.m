@@ -64,7 +64,7 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate>
  * 【3】subview 引起的 滑动
  * 【3.1】与 subview 对象有关，subview的类型只有是：UIScrollView 、 UIScrollView 子类;
  * 【3.2】如果 UIViewController.view 也添加了 UIScrollView 或 UIScrollView子类 对象，
-    以最后添加的该类对象为准
+ 以最后添加的该类对象为准
  */
 @property (nonatomic , assign)CGFloat preMoveY ;
 @property (nonatomic , assign)BOOL isNeedScrollHeaderViewFromGesture;
@@ -162,7 +162,7 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate>
 #pragma mark - 子 scrollView 移动 conentOffset 变化
 -(void)moveSubScrollViewDidScroll:(UIScrollView *)scrollView
 {
-//    NSLog(@"=== subScrollViewDidScroll = %f  ,  %f",scrollView.contentOffset.y,self.contentView.contentOffset.y);
+    //    NSLog(@"=== subScrollViewDidScroll = %f  ,  %f",scrollView.contentOffset.y,self.contentView.contentOffset.y);
     
     if (!self.isNeedScrollHeaderViewFromGesture || !self.headerViewSlideEnabled) {
         return ;
@@ -225,13 +225,20 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate>
     return cell ;
 }
 
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([self.delegate respondsToSelector:@selector(switchView:didSelectItemAtIndex:)]) {
+        [self.delegate switchView:self didSelectItemAtIndex:indexPath.row];
+    }
+}
+
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     self.isNeedNoticePageChanged = YES ;
     self.isWillAppear = YES ;
     self.startLoaction = self.slideLoaction ;
     self.startPageLocation = self.slideLoaction ;
-    NSLog(@"开始手动滑动 === %f",self.slideLoaction);
+    //    NSLog(@"开始手动滑动 === %f",self.slideLoaction);
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -246,7 +253,7 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate>
 
 -(void)contentViewDidScrollView:(UIScrollView *)scrollView
 {
-//   NSLog(@"contentView ----- %f",scrollView.contentOffset.y);
+    //   NSLog(@"contentView ----- %f",scrollView.contentOffset.y);
     
     if (self.isHeaderViewAlwayShowSettingEffective) {
         if (scrollView.contentOffset.y > self.tmpHeaderViewAlwayShowHeightWhenMoveUp) {
@@ -263,7 +270,7 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate>
 
 -(void)collectionViewDidScroll:(UIScrollView *)scrollView
 {
-//    NSLog(@"collectionView scrolling ==== %f",scrollView.contentOffset.x);
+    //    NSLog(@"collectionView scrolling ==== %f",scrollView.contentOffset.x);
     // 下面是collection 滑动
     
     if (self.slideLoaction < self.minSlideLocation) {
@@ -287,7 +294,7 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate>
         return ;
     }
     
-//    self.isNeedScrollHeaderViewFromGesture = NO ;
+    //    self.isNeedScrollHeaderViewFromGesture = NO ;
     if (scrollView.contentOffset.x == (NSInteger)scrollView.contentOffset.x
         && scrollView.contentOffset.x == self.currentPageIndex * self.itemSize.width) {
         self.isNeedScrollHeaderViewFromGesture = YES ;
@@ -353,7 +360,7 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate>
     }
     
     self.startPageLocation = self.slideLoaction ;
-
+    
     _currentPageIndex = pageIndex;
     _currentSubViewOrVc = self.childViewsOrViewControllers[_currentPageIndex];
     
@@ -576,7 +583,7 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate>
 -(void)addChildViewsOrVcsIfNeed:(NSMutableArray *)ChildViewsOrVcs
 {
     NSInteger preCount = self.childViewsOrViewControllers.count ;
-
+    
     for (id viewOrVc in ChildViewsOrVcs) {
         [self addViewOrVcIfNeed:viewOrVc needRefreshData:NO];
     }
@@ -646,7 +653,7 @@ UITableViewDelegate , UITableViewDataSource , UIGestureRecognizerDelegate>
             scrollView = view;
         }
     }
-  
+    
     return scrollView ;
 }
 
