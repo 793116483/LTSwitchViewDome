@@ -1,0 +1,53 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Description of what the lane does"
+  # 打包时候用的名称   例如 fastlane app
+  lane :app do 
+    # add actions here: https://docs.fastlane.tools/actions
+    gym(
+    # 每次打包之前clean一下
+    clean: true,    
+    # 打包出 ipa 文件的路径，我放到了桌面文件夹，你自行更改文件夹
+    output_directory: '/Users/jie/Desktop', 
+    # 打包的名称，可任意取 
+    output_name: 'myApp.ipa', 
+    # 项目的 scheme，自己项目名   .xcworkspace 前面的项目名就是
+    scheme: "Farm",      
+    # 默认 Release，Release or Debug     
+    configuration: 'Debug', 
+    # 是否包含 bitcode  
+    include_bitcode: false,  
+    # 是否包含 symbols 
+    include_symbols: true, 
+    # 打包导出方式，包含 app-store, validation, ad-hoc, package, enterprise, development, developer-id and mac-application   
+    export_method: 'development',  
+    # 这个设置是为了设置 xcode 自动配置证书和配置文件，当然也可以手动配置，可以参考文档
+    export_xcargs: '-allowProvisioningUpdates' 
+    )
+    # mac上的通知弹窗，通知打包完毕
+    notification(app_icon: "./fastlane/icon.png", title: "manager", subtitle: "打包成功，已导出安装包", message: "准备发布到蒲公英中……")
+    #配置上传蒲公英账号  蒲公英的 api_key和 user_key  用自己蒲公英账号的，别用我的！！！如果没有可删除
+    api_key = "12862eca46865c37002cee8fc3f2ac35"
+    user_key = "9b17e50896e467a95dc83b028f7a098e"
+    desc = "测试fastlane自动打包"
+    puts "开始上传到蒲公英"
+    pgyer(update_description: "#{desc}", api_key: "#{api_key}", password: "patpat", install_type: "2")
+
+  end
+end
